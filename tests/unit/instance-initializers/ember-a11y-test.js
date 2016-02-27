@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import EmberA11yInitializer from '../../../initializers/ember-a11y';
+import EmberA11yInitializer from '../../../instance-initializers/ember-a11y';
 import { module, test } from 'qunit';
 
 let application;
 
-module('Unit | Initializer | ember a11y', {
+module('Unit | Instance Initializer | ember a11y', {
   beforeEach() {
     Ember.run(function() {
       application = Ember.Application.create();
