@@ -67,6 +67,17 @@ test('can deal with the same handlers', function(assert) {
   assert.equal(infoHandler.handler.routeName, 'photos.caption');
 });
 
+test('deals with undefined oldHandlers', function(assert) {
+  let newHandlers = [
+    mockInfoHandler('photos'),
+    mockInfoHandler('photos.caption'),
+    mockInfoHandler('photos.caption.edit')
+  ];
+
+  let infoHandler = pivotRouteIdentifier(undefined, newHandlers);
+  assert.equal(infoHandler.handler.routeName, 'photos');
+});
+
 test('can deal with the no handlers', function(assert) {
   assert.throws(function() {
     pivotRouteIdentifier([], []);

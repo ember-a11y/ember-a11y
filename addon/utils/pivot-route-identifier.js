@@ -1,5 +1,9 @@
 export default function pivotRouteIdentifier(oldHandlers, newHandlers) {
 
+  if (oldHandlers === undefined) {
+    return newHandlers[0];
+  }
+
   let length = Math.min(oldHandlers.length, newHandlers.length);
   let offset = oldHandlers.length >= newHandlers.length ? 1 : 0;
 
