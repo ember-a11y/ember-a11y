@@ -1,0 +1,10 @@
+{{~#get-outlet-state outletName as |outletState|~}}
+<dl>
+  <dt>Route:</dt>
+    <dd>{{outletState.outletState.render.name}}</dd>
+  <dt>Outlet Name:</dt>
+    <dd>{{outletName}}</dd>
+  <dt>Outlet Contents:</dt>
+    <dd class={{shouldFocus}}>{{outlet outletName}}</dd>
+</dl>
+{{/get-outlet-state}}
