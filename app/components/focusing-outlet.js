@@ -7,40 +7,40 @@ let FocusingOutlet = Ember.Component.extend({
 
   shouldFocus: false,
 
-  init() {
-    this._super(...arguments);
-
-    this.get('_routing.router').on('willTransition', function() {
-      // this.set('shouldFocus', false);
-    });
-
-    this.get('_routing.router').on('didTransition', function() {
-      if (this.get('shouldFocus')) {
-        // TODO: add tabindex
-        // this.element.focus();
-      }
-    });
-  },
-
-  // TODO: Clean up randomly added events.
-
   didReceiveAttrs() {
     this._super(...arguments);
     this.set('outletName', this.attrs.inputOutletName || 'main');
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+    this.setFocus();
+  },
+
+  setFocus() {
+    if (!this.element) { return; }
+
+    let shouldFocus = this.get('shouldFocus');
+
+    if (shouldFocus) {
+      this.element.setAttribute('tabindex', '-1');
+      this.element.focus();
+    } else {
+      this.element.removeAttribute('tabindex');
+    }
+  },
+
   actions: {
     checkFocus(outletState) {
+      let outletName = this.get('outletName');
+
       let pivotHandler = Ember.getOwner(this)._stashedHandlerInfos.pivotHandler.handler.routeName;
-      let currentRoute = outletState.main.render.name;
+      let currentRoute = outletState[outletName].render.name;
+
       let shouldFocus = (pivotHandler === currentRoute);
-      if (shouldFocus) {
-        this.set('shouldFocus', 'focus');
-        // alert('focus ' + currentRoute);
-      } else {
-        this.set('shouldFocus', '');
-      }
-      // this.set('shouldFocus', shouldFocus);
+      this.set('shouldFocus', shouldFocus);
+
+      this.setFocus();
     }
   }
 });
