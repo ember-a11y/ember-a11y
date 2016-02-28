@@ -12,6 +12,7 @@ Ember.Router.reopen({
   didTransition(handlerInfos) {
     let pivotHandler = pivotRouteIdentifier(stashedHandlerInfos.handlerInfos, handlerInfos);
     stashedHandlerInfos.handlerInfos = handlerInfos;
+    stashedHandlerInfos.pivotHandler = pivotHandler;
     this._super(...arguments);
   }
 });

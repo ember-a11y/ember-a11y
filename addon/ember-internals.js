@@ -21,6 +21,8 @@ try {
 export function registerKeywords() {
   registerKeyword('get-outlet-state', {
     willRender(renderNode, env) {
+      let focusingOutlet = env.view;
+      focusingOutlet.send('checkFocus', env.outletState);
       env.view.ownerView._outlets.push(renderNode);
     },
 
