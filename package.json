@@ -1,6 +1,6 @@
 {
   "name": "ember-a11y",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A collection of tools to build accessible Ember applications.",
   "directories": {
     "doc": "doc",
@@ -34,7 +34,6 @@
     "ember-export-application-global": "^1.0.4",
     "ember-disable-prototype-extensions": "^1.0.0",
     "ember-try": "~0.0.8",
-    "ember-cli-uglify": "^1.2.0",
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.0"
   },
