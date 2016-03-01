@@ -28,6 +28,6 @@ The included sample application contains a demo for testing.
 ## Pushing an updated sample app
 
 ```sh
-ember github-pages:commit --message "Update demo application." --environment=gh-pages`
+ember github-pages:commit --message "Update demo application."
 git push
 ```
