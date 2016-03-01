@@ -1,10 +1,10 @@
-<h2 id="title">Welcome to Ember</h2>
-
-{{#link-to 'index'}}index{{/link-to}}
-{{#link-to 'foo.a'}}foo/a{{/link-to}}
-{{#link-to 'foo.a.one'}}foo/a/one{{/link-to}}
-{{#link-to 'foo.b'}}foo/b{{/link-to}}
-{{#link-to 'bar.a'}}bar/a{{/link-to}}
-<br />
-application
+<h1 id="title">LinkedIn</h1>
+<nav>
+  <ul>
+    <li>{{#link-to 'index'}}Home{{/link-to}}</li>
+    <li>{{#link-to 'messages'}}Messages{{/link-to}}</li>
+    <li>{{#link-to 'feed'}}Feed{{/link-to}}</li>
+    <li>{{#link-to 'profile'}}Profile{{/link-to}}</li>
+  </ul>
+</nav>
 {{focusing-outlet}}

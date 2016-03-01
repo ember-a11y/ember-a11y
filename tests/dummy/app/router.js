@@ -6,18 +6,10 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('foo', function() {
-    this.route('a', function() {
-      this.route('one');
-    });
-    this.route('b');
-    this.route('c');
-  });
-  this.route('bar', function() {
-    this.route('a');
-    this.route('b');
-    this.route('c');
-
+  this.route('feed');
+  this.route('profile');
+  this.route('messages', function() {
+    this.route('message', {path: "/:id"});
   });
 });
 
