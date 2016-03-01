@@ -11,7 +11,10 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanhammond/ember-a11y.git"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -39,12 +42,16 @@
     "loader.js": "^4.0.0"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "a11y",
+    "accessibility",
+    "ember"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.5"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "http://nathanhammond.github.io/ember-a11y"
   }
 }
