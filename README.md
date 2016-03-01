@@ -1,26 +1,33 @@
-# Ember-a11y
+# ember-a11y
 
-This README outlines the details of collaborating on this Ember addon.
+[![Build Status](https://travis-ci.org/nathanhammond/ember-a11y.svg)](https://travis-ci.org/nathanhammond/ember-a11y)
+[![npm version](https://badge.fury.io/js/ember-a11y.svg)](http://badge.fury.io/js/ember-a11y)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-a11y.svg)](http://emberobserver.com/addons/ember-a11y)
+[![Code Climate](https://codeclimate.com/github/nathanhammond/ember-a11y/badges/gpa.svg)](https://codeclimate.com/github/nathanhammond/ember-a11y)
 
-## Installation
+This Ember addon provides a `{{focusing-outlet}}` component which you can use in in place of your normal outlers.
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+## Usage
 
-## Running
+`ember install ember-a11y`
+
+In your templates you would then swap in `{{focusing-outlet}}` for `{{outlet}}` wherever it may occur.
+
+## Running the sample application
+
+The included sample application contains a demo for testing.
 
 * `ember server`
-* Visit your app at http://localhost:4200.
+* Visit your app at [http://localhost:4200](http://localhost:4200).
+* Also available via GitHub Pages [http://nathanhammond.github.io/ember-a11y/](http://nathanhammond.github.io/ember-a11y/)
 
 ## Running Tests
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+* `npm run test`
 
-## Building
+## Pushing an updated sample app
 
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+```sh
+ember github-pages:commit --message "Update demo application." --environment=gh-pages`
+git push
+```
