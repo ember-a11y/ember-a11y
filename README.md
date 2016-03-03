@@ -5,7 +5,7 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-a11y.svg)](http://emberobserver.com/addons/ember-a11y)
 [![Code Climate](https://codeclimate.com/github/nathanhammond/ember-a11y/badges/gpa.svg)](https://codeclimate.com/github/nathanhammond/ember-a11y)
 
-This Ember addon provides a `{{focusing-outlet}}` component which you can use in in place of your normal outlers.
+This Ember addon provides a `{{focusing-outlet}}` component which you can use in place of your normal outlets.
 
 ## Usage
 
