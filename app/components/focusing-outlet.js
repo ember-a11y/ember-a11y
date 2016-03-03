@@ -34,6 +34,7 @@ let FocusingOutlet = Ember.Component.extend({
       // Except when a property is only settable if the attribute is present.
       // We have to make the element interactive prior to focusing it.
       this.element.setAttribute('tabindex', '-1');
+      this.element.setAttribute('role', 'group');
 
       // If we don't do this, the scroll triggered by the focus will be unfortunate.
       // This effectively swallows one scroll event.
@@ -44,6 +45,7 @@ let FocusingOutlet = Ember.Component.extend({
       Ember.run.schedule('afterRender', this, function() { this.element.focus(); });
     } else {
       this.element.removeAttribute('tabindex');
+      this.element.removeAttribute('role');
     }
   },
 
