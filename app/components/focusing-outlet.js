@@ -41,7 +41,7 @@ let FocusingOutlet = Ember.Component.extend({
       window.addEventListener('scroll', handler);
 
       // Set the focus to the target outlet wrapper.
-      this.element.focus();
+      Ember.run.schedule('afterRender', this, function() { this.element.focus(); });
     } else {
       this.element.removeAttribute('tabindex');
     }
