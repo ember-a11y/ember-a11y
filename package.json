@@ -9,7 +9,8 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember try:testall"
+    "test": "ember try:testall",
+    "demo": "git stash && ember github-pages:commit --message \"Update demo application.\" && git push origin gh-pages:gh-pages && git stash pop"
   },
   "repository": {
     "type": "git",

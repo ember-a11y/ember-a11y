@@ -13,9 +13,9 @@ This Ember addon provides a `{{focusing-outlet}}` component which you can use in
 
 In your templates you would then swap in `{{focusing-outlet}}` for `{{outlet}}` wherever it may occur.
 
-## Running the sample application
+## Running the demo application
 
-The included sample application contains a demo for testing.
+Included in this addon is a demo application for testing.
 
 * `ember server`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
@@ -25,9 +25,6 @@ The included sample application contains a demo for testing.
 
 * `npm run test`
 
-## Pushing an updated sample app
+## Publishing an updated demo app
 
-```sh
-ember github-pages:commit --message "Update demo application."
-git push origin gh-pages:gh-pages
-```
+* `npm run demo`
