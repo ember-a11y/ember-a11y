@@ -58,6 +58,13 @@
       <li>AT should begin reading the content, beginning with "Conversations".</li>
     </ol>
 
+    <h3>Focus Ordering</h3>
+    <p>Ensure that we're not focused in some non-existent buffer. Scenarios to write:</p>
+    <ul>
+      <li>Navigate between peer routes, move left and right to check ordering.</li>
+      <li>Navigate to a grandparent route, move left and right to check ordering.</li>
+    </ul>
+
     <h3>Loading Routes</h3>
     <p>Scenarios to write:</p>
     <ul>
@@ -81,6 +88,18 @@
         </ul>
       </li>
     </ul>
+
+    <h3>Transition Changes</h3>
+    <p>Scenarios to write:</p>
+    <ul>
+      <li>Trigger of abort mid-transition.</li>
+      <li>Trigger of redirect mid-transition.</li>
+      <li>Trigger of abort and then starting a new transition.</li>
+      <li>Retrying of a previous transition.</li>
+    </ul>
+
+    <h3>Edge Cases</h3>
+    <p>These are scenarios which have caused issues in certain OS/AT/Browser stacks in the past and are captured here to monitor for regressions.</p>
 
     <h2>Global Substate Tests</h2>
     <nav>
