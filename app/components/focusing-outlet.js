@@ -51,9 +51,10 @@ let FocusingOutlet = Ember.Component.extend({
 
   actions: {
     checkFocus(outletState) {
-      let outletName = this.get('outletName');
+      let owner = Ember.getOwner(this);
+      let pivotHandler = owner.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
 
-      let pivotHandler = Ember.getOwner(this)._stashedHandlerInfos.pivotHandler.handler.routeName;
+      let outletName = this.get('outletName');
       let currentRoute = outletState[outletName].render.name;
 
       let shouldFocus = (pivotHandler === currentRoute);

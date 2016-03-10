@@ -1,0 +1,10 @@
+body { margin: 0; padding: 0; height: 100%; }
+
+.colset { position: absolute; width: 100%; height: 100%; display: flex; }
+.column { box-sizing: border-box; width: 50%; padding: 0 10px; overflow: scroll; }
+.column + .column { border-left: 1px solid #000; }
+
+.focusing-outlet:focus {
+  outline: yellow auto 5px;
+  outline: -webkit-focus-ring-color auto 5px;
+}
