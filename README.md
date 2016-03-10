@@ -5,7 +5,7 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-a11y.svg)](http://emberobserver.com/addons/ember-a11y)
 [![Code Climate](https://codeclimate.com/github/nathanhammond/ember-a11y/badges/gpa.svg)](https://codeclimate.com/github/nathanhammond/ember-a11y)
 
-This Ember addon provides a `{{focusing-outlet}}` component which you can use in place of your normal outlets.
+This Ember addon provides a `{{focusing-outlet}}` component which you can use in place of normal `{{outlet}}`s.
 
 ## Usage
 
@@ -13,18 +13,15 @@ This Ember addon provides a `{{focusing-outlet}}` component which you can use in
 
 In your templates you would then swap in `{{focusing-outlet}}` for `{{outlet}}` wherever it may occur.
 
-## Running the demo application
+## Demo Application
 
 Included in this addon is a demo application for testing.
 
 * `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* Visit the demo app at [http://localhost:4200](http://localhost:4200).
 * Also available via GitHub Pages [http://nathanhammond.github.io/ember-a11y/](http://nathanhammond.github.io/ember-a11y/)
 
-## Running Tests
+## Commands
 
-* `npm run test`
-
-## Publishing an updated demo app
-
-* `npm run demo`
+* `npm run test` - Run all tests.
+* `npm run demo` - Publish an updated demo app.
