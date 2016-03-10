@@ -43,6 +43,7 @@
     <h3>Focus/Reading Behavior</h3>
     <p>This test is for reading behavior. You may use your mouse to click through the links in this test.</p>
     <ol>
+      <li>Follow the reset procedure.</li>
       <li>{{#link-to 'messages'}}Load the messages route.{{/link-to}}</li>
       <li>Focus should be set to a block which begins with the "Messages" header.</li>
       <li>AT should begin reading the content, beginning with "Messages".</li>
@@ -58,8 +59,28 @@
     </ol>
 
     <h3>Loading Routes</h3>
+    <p>Scenarios to write:</p>
+    <ul>
+      <li>Deep link and navigating to a route which loads slowly triggering:
+        <ul>
+          <li>Cascading loading states.</li>
+          <li>/loading (child route) and _loading (substate).</li>
+          <li>Slow loading, but no loading state.</li>
+        </ul>
+      </li>
+    </ul>
 
     <h3>Error Routes</h3>
+    <p>Scenarios to write:</p>
+    <ul>
+      <li>Deep link and visit to a route which errors triggering:
+        <ul>
+          <li>Error substate.</li>
+          <li>Error child route.</li>
+          <li>Global error.</li>
+        </ul>
+      </li>
+    </ul>
 
     <h2>Global Substate Tests</h2>
     <nav>
