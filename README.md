@@ -29,5 +29,5 @@ The included sample application contains a demo for testing.
 
 ```sh
 ember github-pages:commit --message "Update demo application."
-git push
+git push origin gh-pages:gh-pages
 ```
