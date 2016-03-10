@@ -1,13 +1,13 @@
 import Ember from "ember";
 
+let scrollLeft = 0;
 let scrollTop = 0;
 let handler = function(e) {
-  window.scrollTo(0, scrollTop);
+  window.scrollTo(scrollLeft, scrollTop);
   window.removeEventListener('scroll', handler);
 };
 
 let FocusingOutlet = Ember.Component.extend({
-  _routing: Ember.inject.service('-routing'),
   positionalParams: ['inputOutletName'], // needed for Ember 1.13.[0-5] and 2.0.0-beta.[1-3] support
   tagName: 'div',
   classNames: ['focusing-outlet'],
@@ -38,6 +38,8 @@ let FocusingOutlet = Ember.Component.extend({
 
       // If we don't do this, the scroll triggered by the focus will be unfortunate.
       // This effectively swallows one scroll event.
+      // TODO: Investigate setting focus to something inside of overflow: auto;
+      scrollLeft = document.body.scrollLeft;
       scrollTop = document.body.scrollTop;
       window.addEventListener('scroll', handler);
 
