@@ -59,11 +59,39 @@
     </ol>
 
     <h3>Focus Ordering</h3>
-    <p>Ensure that we're not focused in some non-existent buffer. Scenarios to write:</p>
-    <ul>
-      <li>Navigate between peer routes, move left and right to check ordering.</li>
-      <li>Navigate to a grandparent route, move left and right to check ordering.</li>
-    </ul>
+    <p>This test is for focus ordering. You must complete this test using solely the assistive technology you're using. Complete these tasks only using previous and next navigation in your assistive tech. Do not use landmark navigation.</p>
+    <ol>
+      <li>Follow the reset procedure.</li>
+      <li>Enter the content area.</li>
+      <li>Click the "Feed" link.</li>
+      <li>Focus should be set to a block which begins with the "Feed" header.</li>
+      <li>AT should begin reading the content, beginning with "Feed".</li>
+      <li>Navigate to the next item.</li>
+      <li>Virtual cursor focus should be set to the first bullet.</li>
+      <li>Click the "Messages" link.</li>
+      <li>Focus should be set to a block which begins with the "Messages" header.</li>
+      <li>AT should begin reading the content, beginning with "Messages".</li>
+      <li>Navigate to the next item.</li>
+      <li>Virtual cursor focus should be set to the "Conversations" header.</li>
+      <li>Click the "Conversation with Jimmy" link.</li>
+      <li>Focus should be set to a block which begins with the "Thread with Jimmy" header.</li>
+      <li>AT should begin reading the content, beginning with "Thread with Jimmy".</li>
+      <li>Navigate to the next item.</li>
+      <li>Virtual cursor focus should be set to the "Back to message list." link.</li>
+      <li>Click the "Back to message list." link.</li>
+      <li>Focus should be set to a block which begins with the "Conversations" header.</li>
+      <li>AT should begin reading the content, beginning with "Conversations".</li>
+      <li>Navigate to the next item.</li>
+      <li>Virtual cursor focus should be set to the "Conversation with Jimmy" link.</li>
+    </ol>
+
+    <h3>Focus Ordering With Depth Change</h3>
+    <p>This test is for focus ordering. You must complete this test using solely the assistive technology you're using. Complete these tasks only using previous and next navigation in your assistive tech. Do not use landmark navigation.</p>
+    <p>Scenarios to write:</p>
+    <ol>
+      <li>Load parent route.</li>
+      <li>Load grandchild route.</li>
+    </ol>
 
     <h3>Loading Routes</h3>
     <p>Scenarios to write:</p>
