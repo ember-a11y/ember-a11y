@@ -59,7 +59,10 @@ let FocusingOutlet = Ember.Component.extend({
       let outletName = this.get('outletName');
       let currentRoute = outletState[outletName].render.name;
 
-      let shouldFocus = (pivotHandler === currentRoute);
+      let isChildState =  currentRoute === 'loading' || currentRoute === 'error';
+      let isSubstate = ~currentRoute.indexOf('_loading') || ~currentRoute.indexOf('_error');
+
+      let shouldFocus = (pivotHandler === currentRoute) || isChildState || isSubstate;
       this.set('shouldFocus', shouldFocus);
 
       this.setFocus();

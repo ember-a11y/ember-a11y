@@ -48,10 +48,9 @@ test('deals with undefined oldHandlers', function(assert) {
   assert.equal(infoHandler.handler.routeName, 'photos');
 });
 
-test('can deal with the no handlers', function(assert) {
-  assert.throws(function() {
-    pivotRouteIdentifier([], []);
-  });
+test('can deal with no handlers', function(assert) {
+  let infoHandler = pivotRouteIdentifier([], []);
+  assert.equal(infoHandler, undefined);
 });
 
 test('navigating to a subroute', function(assert) {

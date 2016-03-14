@@ -7,7 +7,7 @@ export default function pivotRouteIdentifier(oldHandlers, newHandlers) {
   let offset = oldHandlers.length >= newHandlers.length ? 1 : 0;
 
   if (length === 0) {
-    throw new Error('No handlers detected.');
+    return undefined;
   }
 
   for (let i = 0; i < length; i++) {

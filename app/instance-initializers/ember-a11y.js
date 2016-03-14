@@ -9,9 +9,8 @@ registerKeywords();
 let stashedHandlerInfos = {};
 
 Ember.Router.reopen({
-  didTransition(handlerInfos) {
-    let pivotHandler = pivotRouteIdentifier(stashedHandlerInfos.handlerInfos, handlerInfos);
-    stashedHandlerInfos.handlerInfos = handlerInfos;
+  willTransition(oldHandlerInfos, newHandlerInfos /* transition */) {
+    let pivotHandler = pivotRouteIdentifier(oldHandlerInfos, newHandlerInfos);
     stashedHandlerInfos.pivotHandler = pivotHandler;
     this._super(...arguments);
   }
