@@ -41,6 +41,15 @@
       <li>No focus should have been set.</li>
     </ol>
 
+    <h3>Deep Linking to an Error Route</h3>
+    <p>This test is for reading behavior. You may use your mouse to click through the links in this test.</p>
+    <ol>
+      <li><a href="./boom">Visit boom as the first page of the application.</a></li>
+      <li><button {{action "reload"}}>Hard Reload</button></li>
+      <li>The application should load correctly and begin reading at the top of the page.</li>
+      <li>No focus should have been set.</li>
+    </ol>
+
     <h3>Focus/Reading Behavior</h3>
     <p>This test is for reading behavior. You may use your mouse to click through the links in this test.</p>
     <ol>
