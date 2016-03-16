@@ -8,3 +8,7 @@ body { margin: 0; padding: 0; height: 100%; }
   outline: yellow auto 5px;
   outline: -webkit-focus-ring-color auto 5px;
 }
+
+@import 'gh-fork-ribbon';
+
+.github-fork-ribbon { right: 50%; }
