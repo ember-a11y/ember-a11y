@@ -24,7 +24,11 @@ Router.map(function() {
   this.route('parent', function() {
     this.route('boom');
     this.route('boomsubstate');
-  })
+  });
+
+  this.route('iso-parent', function() {
+    this.route('boom');
+  });
 
   this.route('global-substates-parent', function() {
     this.route('global-substates-child', function() {

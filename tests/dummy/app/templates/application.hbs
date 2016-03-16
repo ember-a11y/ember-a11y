@@ -32,7 +32,7 @@
     </ol>
 
     <h3>Deep Linking</h3>
-    <p>These tests are for reading behavior. You may use your mouse to click through the links in these tests.</p>
+    <p>These tests are for first-experience reading behavior. You may use your mouse to click through the links in these tests.</p>
 
     <h4>Generic Route</h4>
     <ol>
@@ -75,6 +75,15 @@
       <li><button {{action "reload"}}>Hard Reload</button></li>
       <li>The application should load correctly and begin reading at the top of the page.</li>
       <li>Content should include "Boom Substate Error".</li>
+      <li>No focus should have been set.</li>
+    </ol>
+
+    <h4>Error, Global Error Only, Nested</h4>
+    <ol>
+      <li><a href="{{model.prefix}}iso-parent/boom">Visit iso-parent.boom as the first page of the application.</a></li>
+      <li><button {{action "reload"}}>Hard Reload</button></li>
+      <li>The application should load correctly and begin reading at the top of the page.</li>
+      <li>Content should include "Global Error".</li>
       <li>No focus should have been set.</li>
     </ol>
 
