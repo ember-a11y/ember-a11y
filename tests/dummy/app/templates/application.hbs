@@ -7,7 +7,6 @@
         <li>{{#link-to 'messages'}}Messages{{/link-to}}</li>
         <li>{{#link-to 'feed'}}Feed{{/link-to}}</li>
         <li>{{#link-to 'profile'}}Profile{{/link-to}}</li>
-        <li>{{#link-to 'boom'}}Boom{{/link-to}}</li>
       </ul>
     </nav>
 
@@ -33,7 +32,9 @@
     </ol>
 
     <h3>Deep Linking</h3>
-    <p>This test is for reading behavior. You may use your mouse to click through the links in this test.</p>
+    <p>These tests are for reading behavior. You may use your mouse to click through the links in these tests.</p>
+
+    <h4>Generic Route</h4>
     <ol>
       <li>{{#link-to 'messages.message' 'Jimmy'}}Visit messages.message as the first page of the application.{{/link-to}}</li>
       <li><button {{action "reload"}}>Hard Reload</button></li>
@@ -41,12 +42,39 @@
       <li>No focus should have been set.</li>
     </ol>
 
-    <h3>Deep Linking to an Error Route</h3>
-    <p>This test is for reading behavior. You may use your mouse to click through the links in this test.</p>
+    <h4>Error, Sibling Error Route, Top Level</h4>
     <ol>
       <li><a href="{{model.prefix}}boom">Visit boom as the first page of the application.</a></li>
       <li><button {{action "reload"}}>Hard Reload</button></li>
       <li>The application should load correctly and begin reading at the top of the page.</li>
+      <li>Content should include "Global Error".</li>
+      <li>No focus should have been set.</li>
+    </ol>
+
+    <h4>Error, Error Substate, Top Level</h4>
+    <ol>
+      <li><a href="{{model.prefix}}boomsubstate">Visit boomsubstate as the first page of the application.</a></li>
+      <li><button {{action "reload"}}>Hard Reload</button></li>
+      <li>The application should load correctly and begin reading at the top of the page.</li>
+      <li>Content should include "Boom Substate Error".</li>
+      <li>No focus should have been set.</li>
+    </ol>
+
+    <h4>Error, Sibling Error Route, Nested</h4>
+    <ol>
+      <li><a href="{{model.prefix}}parent/boom">Visit parent.boom as the first page of the application.</a></li>
+      <li><button {{action "reload"}}>Hard Reload</button></li>
+      <li>The application should load correctly and begin reading at the top of the page.</li>
+      <li>Content should include "Parent Error".</li>
+      <li>No focus should have been set.</li>
+    </ol>
+
+    <h4>Error, Error Substate, Nested</h4>
+    <ol>
+      <li><a href="{{model.prefix}}parent/boomsubstate">Visit parent.boomsubstate as the first page of the application.</a></li>
+      <li><button {{action "reload"}}>Hard Reload</button></li>
+      <li>The application should load correctly and begin reading at the top of the page.</li>
+      <li>Content should include "Boom Substate Error".</li>
       <li>No focus should have been set.</li>
     </ol>
 
