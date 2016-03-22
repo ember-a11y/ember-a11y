@@ -16,7 +16,7 @@ Router.map(function() {
     this.route('message', {path: "/:id"});
   });
 
-  // Routes to test loading and error states globally.
+  // Routes to test loading and error states.
   this.route('boom');
   this.route('boomsubstate');
   this.route('slow');
@@ -28,29 +28,6 @@ Router.map(function() {
 
   this.route('iso-parent', function() {
     this.route('boom');
-  });
-
-  this.route('global-substates-parent', function() {
-    this.route('global-substates-child', function() {
-      this.route('boom');
-      this.route('slow');
-    });
-    this.route('boom');
-    this.route('slow');
-  });
-
-  // Routes to test loading and error states locally.
-  this.route('local-substates-parent', function() {
-    this.route('local-substates-child', function() {
-      this.route('local-substates-grandchild', function() {
-        this.route('boom');
-        this.route('slow');
-      });
-      this.route('boom');
-      this.route('slow');
-    });
-    this.route('boom');
-    this.route('slow');
   });
 
 });

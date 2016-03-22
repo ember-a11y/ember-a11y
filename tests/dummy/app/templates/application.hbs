@@ -82,7 +82,9 @@
     </ol>
 
     <h3>Focus/Reading Behavior</h3>
-    <p>This test is for reading behavior. You may use your mouse to click through the links in this test.</p>
+    <p>These tests are for reading behavior. You may use your mouse to click through the links in this test.</p>
+
+    <h4>General</h4>
     <ol>
       <li>Follow the reset procedure.</li>
       <li>{{#link-to 'messages'}}Load the messages route.{{/link-to}}</li>
@@ -97,6 +99,38 @@
       <li>{{#link-to 'messages'}}Load the messages route.{{/link-to}}</li>
       <li>Focus should be set to a block which begins with the "Conversations" header.</li>
       <li>AT should begin reading the content, beginning with "Conversations".</li>
+    </ol>
+
+    <h4>Error States</h4>
+    <ol>
+      <li>Follow the reset procedure.</li>
+
+      {{!-- Check linking to peers with local error states. --}}
+      <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
+      <li>{{#link-to 'boom'}}Load the boom route.{{/link-to}}</li>
+      <li>{{#link-to 'profile'}}Load the profile route.{{/link-to}}</li>
+      <li>{{#link-to 'boomsubstate'}}Load the boomsubstate route.{{/link-to}}</li>
+
+      {{!-- Check linking across levels to routes with local error states. --}}
+      <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
+      <li>{{#link-to 'parent.boom'}}Load the parent.boom route.{{/link-to}}</li>
+      <li>{{#link-to 'profile'}}Load the profile route.{{/link-to}}</li>
+      <li>{{#link-to 'parent.boomsubstate'}}Load the parent.boomsubstate route.{{/link-to}} <strong>BUG!</strong></li>
+
+      {{!-- Check linking to descendant routes with local error states. --}}
+      <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
+      <li>{{#link-to 'parent'}}Load the parent route.{{/link-to}}</li>
+      <li>{{#link-to 'parent.boom'}}Load the parent.boom route.{{/link-to}} <strong>BUG!</strong></li>
+      <li>{{#link-to 'profile'}}Load the profile route.{{/link-to}}</li>
+      <li>{{#link-to 'parent'}}Load the parent route.{{/link-to}}</li>
+      <li>{{#link-to 'parent.boomsubstate'}}Load the parent.boomsubstate route.{{/link-to}}</li>
+
+      {{!-- Check things that bubble to global error states. --}}
+      <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
+      <li>{{#link-to 'iso-parent.boom'}}Load the iso-parent.boom route.{{/link-to}}</li>
+      <li>{{#link-to 'profile'}}Load the profile route.{{/link-to}}</li>
+      <li>{{#link-to 'iso-parent'}}Load the iso-parent route.{{/link-to}}</li>
+      <li>{{#link-to 'iso-parent.boom'}}Load the iso-parent.boom route.{{/link-to}}</li>
     </ol>
 
     <h3>Focus Ordering</h3>
@@ -138,18 +172,6 @@
       </li>
     </ul>
 
-    <h3>Error Routes</h3>
-    <p>Scenarios to write:</p>
-    <ul>
-      <li>Deep link and visit to a route which errors triggering:
-        <ul>
-          <li>Error substate.</li>
-          <li>Error child route.</li>
-          <li>Global error.</li>
-        </ul>
-      </li>
-    </ul>
-
     <h3>Transition Changes</h3>
     <p>Scenarios to write:</p>
     <ul>
@@ -161,59 +183,6 @@
 
     <h3>Edge Cases</h3>
     <p>These are scenarios which have caused issues in certain OS/AT/Browser stacks in the past and are captured here to monitor for regressions.</p>
-
-    <h2>Global Substate Tests</h2>
-    <nav>
-      <ul>
-        <li>{{#link-to 'boom'}}boom{{/link-to}}</li>
-        <li>{{#link-to 'slow'}}slow{{/link-to}}</li>
-
-        <li>{{#link-to 'global-substates-parent'}}global-substates-parent{{/link-to}}
-          <ul>
-            <li>{{#link-to 'global-substates-parent.index'}}global-substates-parent.index{{/link-to}}</li>
-            <li>{{#link-to 'global-substates-parent.boom'}}global-substates-parent.boom{{/link-to}}</li>
-            <li>{{#link-to 'global-substates-parent.slow'}}global-substates-parent.slow{{/link-to}}</li>
-            <li>{{#link-to 'global-substates-parent.global-substates-child'}}global-substates-parent.global-substates-child{{/link-to}}
-              <ul>
-                <li>{{#link-to 'global-substates-parent.global-substates-child.index'}}global-substates-parent.global-substates-child.index{{/link-to}}</li>
-                <li>{{#link-to 'global-substates-parent.global-substates-child.boom'}}global-substates-parent.global-substates-child.boom{{/link-to}}</li>
-                <li>{{#link-to 'global-substates-parent.global-substates-child.slow'}}global-substates-parent.global-substates-child.slow{{/link-to}}</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-
-      </ul>
-    </nav>
-
-    <h2>Local Substate Tests</h2>
-    <nav>
-      <ul>
-        <li>{{#link-to 'local-substates-parent'}}local-substates-parent{{/link-to}}
-          <ul>
-            <li>{{#link-to 'local-substates-parent.index'}}local-substates-parent.index{{/link-to}}</li>
-            <li>{{#link-to 'local-substates-parent.boom'}}local-substates-parent.boom{{/link-to}}</li>
-            <li>{{#link-to 'local-substates-parent.slow'}}local-substates-parent.slow{{/link-to}}</li>
-            <li>{{#link-to 'local-substates-parent.local-substates-child'}}local-substates-parent.local-substates-child{{/link-to}}
-              <ul>
-                <li>{{#link-to 'local-substates-parent.local-substates-child.index'}}local-substates-parent.local-substates-child.index{{/link-to}}</li>
-                <li>{{#link-to 'local-substates-parent.local-substates-child.boom'}}local-substates-parent.local-substates-child.boom{{/link-to}}</li>
-                <li>{{#link-to 'local-substates-parent.local-substates-child.slow'}}local-substates-parent.local-substates-child.slow{{/link-to}}</li>
-                <li>{{#link-to 'local-substates-parent.local-substates-child.local-substates-grandchild'}}local-substates-parent.local-substates-child.local-substates-grandchild{{/link-to}}
-                  <ul>
-                    <li>{{#link-to 'local-substates-parent.local-substates-child.local-substates-grandchild.index'}}local-substates-parent.local-substates-child.local-substates-grandchild.index{{/link-to}}</li>
-                    <li>{{#link-to 'local-substates-parent.local-substates-child.local-substates-grandchild.boom'}}local-substates-parent.local-substates-child.local-substates-grandchild.boom{{/link-to}}</li>
-                    <li>{{#link-to 'local-substates-parent.local-substates-child.local-substates-grandchild.slow'}}local-substates-parent.local-substates-child.local-substates-grandchild.slow{{/link-to}}</li>
-                  </ul>
-                </li>
-
-              </ul>
-            </li>
-          </ul>
-        </li>
-
-      </ul>
-    </nav>
 
   </div>
 </div>
