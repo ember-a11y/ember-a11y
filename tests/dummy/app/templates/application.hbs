@@ -81,23 +81,19 @@
       <li>No focus should have been set.</li>
     </ol>
 
-    <h3>Focus/Reading Behavior</h3>
+    <h3>Reading Behavior</h3>
     <p>These tests are for reading behavior. You may use your mouse to click through the links in this test.</p>
 
     <h4>General</h4>
     <ol>
       <li>Follow the reset procedure.</li>
       <li>{{#link-to 'messages'}}Load the messages route.{{/link-to}}</li>
-      <li>Focus should be set to a block which begins with the "Messages" header.</li>
       <li>AT should begin reading the content, beginning with "Messages".</li>
       <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
-      <li>Focus should be set to a block which begins with the "Feed" header.</li>
       <li>AT should begin reading the content, beginning with "Feed".</li>
       <li>{{#link-to 'messages.message' 'Jimmy'}}Deep link into a messages child route.{{/link-to}}</li>
-      <li>Focus should be set to a block which begins with the "Messages" header.</li>
       <li>AT should begin reading the content, beginning with "Messages".</li>
       <li>{{#link-to 'messages'}}Load the messages route.{{/link-to}}</li>
-      <li>Focus should be set to a block which begins with the "Conversations" header.</li>
       <li>AT should begin reading the content, beginning with "Conversations".</li>
     </ol>
 
