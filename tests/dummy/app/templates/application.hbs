@@ -97,38 +97,6 @@
       <li>AT should begin reading the content, beginning with "Conversations".</li>
     </ol>
 
-    <h4>Error States</h4>
-    <ol>
-      <li>Follow the reset procedure.</li>
-
-      {{!-- Check linking to peers with local error states. --}}
-      <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
-      <li>{{#link-to 'boom'}}Load the boom route.{{/link-to}}</li>
-      <li>{{#link-to 'profile'}}Load the profile route.{{/link-to}}</li>
-      <li>{{#link-to 'boomsubstate'}}Load the boomsubstate route.{{/link-to}}</li>
-
-      {{!-- Check linking across levels to routes with local error states. --}}
-      <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
-      <li>{{#link-to 'parent.boom'}}Load the parent.boom route.{{/link-to}}</li>
-      <li>{{#link-to 'profile'}}Load the profile route.{{/link-to}}</li>
-      <li>{{#link-to 'parent.boomsubstate'}}Load the parent.boomsubstate route.{{/link-to}}</li>
-
-      {{!-- Check linking to descendant routes with local error states. --}}
-      <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
-      <li>{{#link-to 'parent'}}Load the parent route.{{/link-to}}</li>
-      <li>{{#link-to 'parent.boom'}}Load the parent.boom route.{{/link-to}}</li>
-      <li>{{#link-to 'profile'}}Load the profile route.{{/link-to}}</li>
-      <li>{{#link-to 'parent'}}Load the parent route.{{/link-to}}</li>
-      <li>{{#link-to 'parent.boomsubstate'}}Load the parent.boomsubstate route.{{/link-to}}</li>
-
-      {{!-- Check things that bubble to global error states. --}}
-      <li>{{#link-to 'feed'}}Load the feed route.{{/link-to}}</li>
-      <li>{{#link-to 'iso-parent.boom'}}Load the iso-parent.boom route.{{/link-to}}</li>
-      <li>{{#link-to 'profile'}}Load the profile route.{{/link-to}}</li>
-      <li>{{#link-to 'iso-parent'}}Load the iso-parent route.{{/link-to}}</li>
-      <li>{{#link-to 'iso-parent.boom'}}Load the iso-parent.boom route.{{/link-to}}</li>
-    </ol>
-
     <h3>Focus Ordering</h3>
     <p>This test is for focus ordering. You must complete this test using solely the assistive technology you're using. Complete these tasks only using previous and next navigation in your assistive tech. Do not use landmark navigation.</p>
     <ol>
