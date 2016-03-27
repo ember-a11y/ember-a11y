@@ -62,7 +62,7 @@ let FocusingOutlet = Ember.Component.extend({
       let handled = owner.get('_stashedHandlerInfos.pivotHandler.handled');
       let isFirstVisit = pivotHandler === undefined;
       let isPivot = (pivotHandler === currentRoute);
-      let isChildState =  currentRoute === 'loading' || currentRoute === 'error';
+      let isChildState = ~['loading', 'error'].indexOf(currentRoute.split('.').pop());
       let isSubstate = ~currentRoute.indexOf('_loading') || ~currentRoute.indexOf('_error');
 
       let shouldFocus = !handled && !isFirstVisit && (isPivot || isChildState || isSubstate);
