@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nathanhammond/ember-a11y.git"
+    "url": "git+https://github.com/ember-a11y/ember-a11y.git"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -55,6 +55,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://nathanhammond.github.io/ember-a11y"
+    "demoURL": "http://ember-a11y.github.io/ember-a11y"
   }
 }
