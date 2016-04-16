@@ -57,7 +57,13 @@ let FocusingOutlet = Ember.Component.extend({
       let pivotHandler = owner.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
 
       let outletName = this.get('outletName');
-      let currentRoute = outletState[outletName].render.name;
+      let outletObj = outletState[outletName];
+      let currentRoute = '';
+
+      // In case of focusing-outlet used in the last route node this would be falsy!
+      if (Ember.isPresent(outletObj)) {
+        currentRoute = outletObj.render.name;
+      }
 
       let handled = owner.get('_stashedHandlerInfos.pivotHandler.handled');
       let isFirstVisit = pivotHandler === undefined;

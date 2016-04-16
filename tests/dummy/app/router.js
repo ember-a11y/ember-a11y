@@ -16,6 +16,11 @@ Router.map(function() {
     this.route('message', {path: "/:id"});
   });
 
+  // Routes to test focusing outlet on last route in a route path
+  this.route('about', function() {
+    this.route('us');
+  });
+
   // Routes to test loading and error states.
   this.route('boom');
   this.route('boomsubstate');

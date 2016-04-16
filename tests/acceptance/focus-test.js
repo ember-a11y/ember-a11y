@@ -97,3 +97,10 @@ test('Linking to descendant routes with local error states.', function(assert) {
   visit('/iso-parent/boom');
   andThen(() => { assert.equal(checkFocus(), 'Global Error'); });
 });
+
+test('Should load an end route with a focusing outlet without any errors', function(assert) {
+  visit('/');
+  visit('/about');
+  visit('/about/us');
+  andThen(() => { assert.ok(checkFocus().indexOf('happy') !== -1); });
+});
