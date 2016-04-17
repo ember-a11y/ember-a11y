@@ -98,9 +98,8 @@ test('Linking to descendant routes with local error states.', function(assert) {
   andThen(() => { assert.equal(checkFocus(), 'Global Error'); });
 });
 
-test('Should load an end route with a focusing outlet without any errors', function(assert) {
+test('Should load leaf routes with a spurious focusing outlet without any errors.', function(assert) {
   visit('/');
   visit('/about');
-  visit('/about/us');
-  andThen(() => { assert.ok(checkFocus().indexOf('happy') !== -1); });
+  andThen(() => { assert.equal(checkFocus(), 'About Us'); });
 });

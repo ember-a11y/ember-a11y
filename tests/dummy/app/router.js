@@ -17,9 +17,7 @@ Router.map(function() {
   });
 
   // Routes to test focusing outlet on last route in a route path
-  this.route('about', function() {
-    this.route('us');
-  });
+  this.route('about');
 
   // Routes to test loading and error states.
   this.route('boom');
