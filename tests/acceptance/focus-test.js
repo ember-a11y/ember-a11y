@@ -97,3 +97,9 @@ test('Linking to descendant routes with local error states.', function(assert) {
   visit('/iso-parent/boom');
   andThen(() => { assert.equal(checkFocus(), 'Global Error'); });
 });
+
+test('Should load leaf routes with a spurious focusing outlet without any errors.', function(assert) {
+  visit('/');
+  visit('/about');
+  andThen(() => { assert.equal(checkFocus(), 'About Us'); });
+});

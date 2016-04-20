@@ -1,5 +1,7 @@
 import Ember from "ember";
 
+const { get } = Ember;
+
 let scrollLeft = 0;
 let scrollTop = 0;
 let handler = function(e) {
@@ -57,7 +59,11 @@ let FocusingOutlet = Ember.Component.extend({
       let pivotHandler = owner.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
 
       let outletName = this.get('outletName');
-      let currentRoute = outletState[outletName].render.name;
+
+      let currentRoute = get(outletState, `${outletName}.render.name`);
+      if (!currentRoute) {
+        return;
+      }
 
       let handled = owner.get('_stashedHandlerInfos.pivotHandler.handled');
       let isFirstVisit = pivotHandler === undefined;
