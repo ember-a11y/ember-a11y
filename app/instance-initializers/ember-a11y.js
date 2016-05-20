@@ -16,14 +16,9 @@ Ember.Router.reopen({
   }
 });
 
-export function initialize(applicationInstance) {
-  if (arguments.length > 1) {
-    applicationInstance = arguments[1];
-  }
-  const container = applicationInstance.container ? applicationInstance.container : applicationInstance.__container__;
-  const application = container.lookup('application:main');
-
-  application._stashedHandlerInfos = stashedHandlerInfos;
+export function initialize(instance) {
+  const lookupContext = instance.lookup ? instance : instance.container;
+  lookupContext.lookup('application:main')._stashedHandlerInfos = stashedHandlerInfos;
 }
 
 export default {
