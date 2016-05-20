@@ -7,7 +7,7 @@ import Ember from "ember";
 var emberRequire = Ember.__loader.require;
 var internal = emberRequire('htmlbars-runtime').internal;
 var registerKeyword = emberRequire('ember-htmlbars/keywords').registerKeyword;
-var _Stream = emberRequire('ember-metal/streams/stream');
+var _Stream = Ember.__loader.registry['ember-metal/streams/stream'] ? emberRequire('ember-metal/streams/stream') : emberRequire('ember-htmlbars/streams/stream');
 var BasicStream = _Stream.default;
 var Stream = _Stream.Stream;
 
