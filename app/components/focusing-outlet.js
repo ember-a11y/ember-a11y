@@ -1,4 +1,5 @@
 import Ember from "ember";
+import getOwner from 'ember-getowner-polyfill';
 
 const { get } = Ember;
 
@@ -55,8 +56,8 @@ let FocusingOutlet = Ember.Component.extend({
 
   actions: {
     checkFocus(outletState) {
-      let owner = Ember.getOwner(this);
-      let pivotHandler = owner.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
+      let application = getOwner(this).lookup('application:main');
+      let pivotHandler = application.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
 
       let outletName = this.get('outletName');
 
@@ -65,7 +66,7 @@ let FocusingOutlet = Ember.Component.extend({
         return;
       }
 
-      let handled = owner.get('_stashedHandlerInfos.pivotHandler.handled');
+      let handled = application.get('_stashedHandlerInfos.pivotHandler.handled');
       let isFirstVisit = pivotHandler === undefined;
       let isPivot = (pivotHandler === currentRoute);
       let isChildState = ~['loading', 'error'].indexOf(currentRoute.split('.').pop());
@@ -75,7 +76,7 @@ let FocusingOutlet = Ember.Component.extend({
       this.set('shouldFocus', shouldFocus);
 
       if (pivotHandler) {
-        owner.set('_stashedHandlerInfos.pivotHandler.handled', handled || shouldFocus);
+        application.set('_stashedHandlerInfos.pivotHandler.handled', handled || shouldFocus);
       }
 
       this.setFocus();
