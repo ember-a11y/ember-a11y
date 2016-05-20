@@ -8,6 +8,17 @@ module.exports = {
       }
     },
     {
+      name: 'ember-1.13',
+      bower: {
+        dependencies: {
+          'ember': '~1.13.0'
+        },
+        resolutions: {
+          'ember': '~1.13.0'
+        }
+      }
+    },
+    {
       name: 'ember-release',
       bower: {
         dependencies: {
@@ -37,6 +48,17 @@ module.exports = {
         },
         resolutions: {
           'ember': 'canary'
+        }
+      }
+    },
+    {
+      name: 'ember-lts-2.4',
+      bower: {
+        dependencies: {
+          'ember': 'components/ember#lts-2-4'
+        },
+        resolutions: {
+          'ember': 'lts-2-4'
         }
       }
     }
