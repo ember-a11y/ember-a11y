@@ -9,6 +9,12 @@ module('Unit | Instance Initializer | ember a11y', {
     Ember.run(function() {
       application = Ember.Application.create();
       application.deferReadiness();
+
+      // Force `lookup` to exist prior to `ready`.
+      // Guarded because `buildInstance` doesn't exist in 1.13.
+      if (application.buildInstance) {
+        application = application.buildInstance();
+      }
     });
   }
 });
