@@ -16,6 +16,7 @@
     <h1>Testing Procedure</h1>
     <p>Since there is no way to automate screen readers for testing, this is an interactive script to help you run all of the tests inside of each screen reader.</p>
 
+
     <h2>Reset Procedure</h2>
     <ol>
       <li>{{#link-to 'index'}}Load the index route.{{/link-to}}</li>
@@ -35,6 +36,8 @@
       <li>The application should load correctly and begin reading at the top of the page.</li>
       <li>No focus should have been set.</li>
     </ol>
+     
+    {{github-issue 'Generic Route'}}
 
     <h4>Error, Sibling Error Route, Top Level</h4>
     <ol>
@@ -44,6 +47,8 @@
       <li>Content should include "Global Error".</li>
       <li>No focus should have been set.</li>
     </ol>
+     
+    {{github-issue 'Error, Sibling Error Route, Top Level'}}
 
     <h4>Error, Error Substate, Top Level</h4>
     <ol>
@@ -53,6 +58,8 @@
       <li>Content should include "Boom Substate Error".</li>
       <li>No focus should have been set.</li>
     </ol>
+     
+    {{github-issue 'Error, Error Substate, Top Level'}}
 
     <h4>Error, Sibling Error Route, Nested</h4>
     <ol>
@@ -62,6 +69,8 @@
       <li>Content should include "Parent Error".</li>
       <li>No focus should have been set.</li>
     </ol>
+     
+    {{github-issue 'Error, Sibling Error Route, Nested'}}
 
     <h4>Error, Error Substate, Nested</h4>
     <ol>
@@ -71,6 +80,8 @@
       <li>Content should include "Boom Substate Error".</li>
       <li>No focus should have been set.</li>
     </ol>
+     
+    {{github-issue 'Error, Error Substate, Nested'}}
 
     <h4>Error, Global Error Only, Nested</h4>
     <ol>
@@ -80,6 +91,7 @@
       <li>Content should include "Global Error".</li>
       <li>No focus should have been set.</li>
     </ol>
+    {{github-issue 'Error, Global Error Only, Nested'}}
 
     <h3>Reading Behavior</h3>
     <p>These tests are for reading behavior. You may use your mouse to click through the links in this test.</p>
@@ -96,6 +108,10 @@
       <li>{{#link-to 'messages'}}Load the messages route.{{/link-to}}</li>
       <li>AT should begin reading the content, beginning with "Conversations".</li>
     </ol>
+
+
+     
+    {{github-issue 'Reading Behavior'}}
 
     <h3>Focus Ordering</h3>
     <p>This test is for focus ordering. You must complete this test using solely the assistive technology you're using. Complete these tasks only using previous and next navigation in your assistive tech. Do not use landmark navigation.</p>
@@ -123,6 +139,10 @@
       <li>Navigate to the next item.</li>
       <li>Virtual cursor focus should be set to the "Conversation with Jimmy" link.</li>
     </ol>
+
+
+     
+    {{github-issue 'Focus Ordering'}}
 
     <h3>Query Params</h3>
     <p>Scenarios to write:</p>
