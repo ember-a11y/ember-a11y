@@ -3,6 +3,7 @@ import Ember from 'ember';
 const {
   Route,
   Object: EmberObject,
+  A,
   computed: { sort }
 } = Ember;
 
@@ -24,7 +25,6 @@ const FeedItemsList = EmberObject.extend({
 });
 
 export default Route.extend({
-
   queryParams: {
     title: {
       refreshModel: true,
@@ -35,36 +35,42 @@ export default Route.extend({
       replace: true,
     },
     createdAt: {
-      refreshModel: false,  
+      refreshModel: false,
       replace: true,
     }
   },
 
-  model({ title, type }) {
-    const feedItems = type ?
-      this._createFeedItems().filter(item => item.get('type').toLowerCase() === type.toLowerCase())
-      :
-      this._createFeedItems();
+  model({ title, type, createdAt }) {
+    const titleSorting = title ? `title:${title}` : '';
+    const createdAtSorting = createdAt ? `createdAt:${createdAt}` : '';
 
-    const feedItemsSorting = title ? `title:${title}` : '';
+    let feedItems = this._createFeedItems();
+    if (type) {
+      feedItems = feedItems.filter(item => item.get('type').toLowerCase() === type.toLowerCase());
+    }
 
     const feedItemsList = FeedItemsList.create({
-      feedItemsSorting: [feedItemsSorting],
+      feedItemsSorting: [createdAtSorting, titleSorting],
       feedItems
     });
-
     return feedItemsList.get('sortedFeedItems');
   },
 
-
-  _createFeedItems () {
+  /**
+   * Sample set of feed items -- no particular alphabetical sorting,
+   * but we'll start ordered by least-recently created so we can test
+   * updating query params to most-recently created
+   */
+  _createFeedItems() {
     const now = Date.now();
-    return [
-      FeedItem.create({ title: 'Nathan liked your post "Why A11y is Awesome".', type: 'Likes', createdAt: new Date(now - 10e7 * 1) }),
-      FeedItem.create({ title: 'Tomster sent you a private message.', type: 'Messages', createdAt: new Date(now - 10e7 * 2) }),
-      FeedItem.create({ title: 'Tomster liked your post "Why A11y is Awesome".', type: 'Likes', createdAt: new Date(now - 10e7 * 3) }),
+
+    return A([
+      FeedItem.create({ title: 'Nathan liked your post "Why A11y is Awesome".', type: 'Likes', createdAt: new Date(now - 10e7 * 10) }),
+      FeedItem.create({ title: 'Tomster sent you a private message.', type: 'Messages', createdAt: new Date(now - 10e7 * 8) }),
+      FeedItem.create({ title: 'Tomster liked your post "Why A11y is Awesome".', type: 'Likes', createdAt: new Date(now - 10e7 * 6) }),
       FeedItem.create({ title: 'Alice sent you a private message.', type: 'Messages', createdAt: new Date(now - 10e7 * 4) }),
-      FeedItem.create({ title: 'Tony Stark liked your post "Why A11y is Awesome".', type: 'Likes', createdAt: new Date(now - 10e7 * 5) })
-    ];
+      FeedItem.create({ title: 'Tony Stark liked your post "Why A11y is Awesome".', type: 'Likes', createdAt: new Date(now - 10e7 * 2) }),
+      FeedItem.create({ title: 'Zoey sent you a private message.', type: 'Messages', createdAt: new Date() })
+    ]);
   }
 });

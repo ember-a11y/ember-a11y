@@ -133,21 +133,21 @@
     {{github-issue title="Focus Ordering"}}
 
     <h3>Query Params</h3>
-    {{!-- <p>Scenarios to write:</p>
-    <ul>
-      <li>Refreshing model</li>
-      <li>Non-refreshing model</li>
-    </ul> --}}
     <ol>
       <li>Click the "Feed" link.</li>
       <li>Focus should be set to a block which begins with the "Feed" header.</li>
-      <li>{{#link-to 'feed' (query-params title="asc")}}Upate query params to sort items alphabetically (A-Z){{/link-to}}</li>
+      <li>{{#link-to 'feed' (query-params title="asc")}}Update query params to sort items alphabetically (A-Z){{/link-to}}</li>
       <li>Items should reorder accordingly</li>
       <li>Focus should be maintained on the block which begins with the "Feed" header.</li>
-      <li>{{#link-to 'feed' (query-params type="messages")}}Upate query params to filter on the <i>Messages</i> type{{/link-to}}</li>
-      <li>Only items with the type <i>Messages</i> should be shown.</li>
+      <li>{{#link-to 'feed' (query-params type="messages")}}Update query params to filter on the <i>Messages</i> type{{/link-to}}</li>
+      <li>Only <i>Messages</i> items should displayed -- and they should be sorted A-Z</li>
       <li>Focus should be maintained on the block which begins with the "Feed" header.</li>
-      <li><strong>TODO: Add scenario for changing a QP that doesn't refresh the model.</strong></li>
+      <li>{{#link-to 'feed' (query-params createdAt="desc")}}Update query params to sort by the most recent items{{/link-to}}</li>
+      <li>The URL should change, but the display shouldn't (<i>createdAt</i> is a non-model-refreshing query param)</li>
+      <li><button {{action "reload"}}>Hard Reload</button></li>
+      <li>The application should load correctly and begin reading at the top of the page.</li>
+      <li>No focus should have been set.</li>
+      <li>Only <i>Messages</i> items should displayed -- and they should be sorted by the most recent creation date.</li>
     </ol>
 
     <h3>Loading Routes</h3>
