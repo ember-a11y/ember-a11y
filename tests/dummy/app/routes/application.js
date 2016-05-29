@@ -7,6 +7,10 @@ export default Ember.Route.extend({
     return { prefix };
   },
   actions: {
+    resetDemo() {
+      this.transitionTo('index').then(() => this.send('reload'));
+    },
+
     reload() {
       window.location.reload(true);
     }
