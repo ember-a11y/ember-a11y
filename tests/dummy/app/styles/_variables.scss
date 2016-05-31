@@ -1,0 +1,43 @@
+/* COLORS
+/* ---------------------------------------------------------- */
+$color__off-white: #FFFAF1;
+
+/* Ember Orange */
+$theme-color__orange-light: #FF9684;
+$theme-color__orange-medium: #FF5538;
+$theme-color__orange-dark: #7F2A1C;
+
+/* Theme Colors */
+$theme-color__primary-1-light: #ACB7F8;
+$theme-color__primary-1-medium: #42465F;
+$theme-color__primary-1-dark: #1F254A;
+
+$theme-color__secondary-light: #71D9A9;
+$theme-color__secondary-medium: #ACD1C0;
+$theme-color__secondary-dark: #2B5140;
+
+$font-color__primary: #1C1C1D;
+$background-color__primary: $color__off-white;
+
+
+/* FONTS
+/* ---------------------------------------------------------- */
+
+/*
+* Target the system fonts first (http://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/)
+* then provide similar fallbacks
+*/
+$font-family-stack:
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      Avenir,
+      Geneva,
+      Tahoma,
+      san-serif;
