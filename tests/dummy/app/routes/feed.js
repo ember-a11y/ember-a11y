@@ -21,22 +21,22 @@ const FeedItem = EmberObject.extend({
 const FeedItemsList = EmberObject.extend({
   feedItems: null,
   feedItemsSorting: [],
-  sortedFeedItems: sort('feedItems', 'feedItemsSorting'),
+  sortedFeedItems: sort('feedItems', 'feedItemsSorting')
 });
 
 export default Route.extend({
   queryParams: {
     title: {
       refreshModel: true,
-      replace: true,  // prevents an additional item from being added to browser history
+      replace: true // prevents an additional item from being added to browser history
     },
     type: {
       refreshModel: true,
-      replace: true,
+      replace: true
     },
     createdAt: {
       refreshModel: false,
-      replace: true,
+      replace: true
     }
   },
 
