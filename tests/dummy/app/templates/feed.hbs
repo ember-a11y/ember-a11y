@@ -1,6 +1,6 @@
 <h2>Feed</h2>
 <ul role="group">
-  {{#each model as |feedItem|}}
+  {{#each feedItems as |feedItem|}}
     <li>{{feedItem.title}} (Type: <i>{{feedItem.type}}</i>, Date: {{feedItem.displayDate}})</li>
   {{/each}}
 </ul>

@@ -133,21 +133,30 @@
     {{github-issue title="Focus Ordering"}}
 
     <h3>Query Params</h3>
+    <p>These tests are for focusing behavior. You may use your mouse to click through the links in this test.</p>
     <ol>
-      <li>Click the "Feed" link.</li>
+      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
+      <li>{{#link-to "feed"}}Load the Feed route.{{/link-to}}</li>
       <li>Focus should be set to a block which begins with the "Feed" header.</li>
-      <li>{{#link-to 'feed' (query-params title="asc")}}Update query params to sort items alphabetically (A-Z){{/link-to}}</li>
-      <li>Items should reorder accordingly</li>
-      <li>Focus should be maintained on the block which begins with the "Feed" header.</li>
-      <li>{{#link-to 'feed' (query-params type="messages")}}Update query params to filter on the <i>Messages</i> type{{/link-to}}</li>
-      <li>Only <i>Messages</i> items should displayed -- and they should be sorted A-Z</li>
-      <li>Focus should be maintained on the block which begins with the "Feed" header.</li>
-      <li>{{#link-to 'feed' (query-params createdAt="desc")}}Update query params to sort by the most recent items{{/link-to}}</li>
-      <li>The URL should change, but the display shouldn't (<i>createdAt</i> is a non-model-refreshing query param)</li>
+
+      <li>{{#link-to "feed" (query-params sort="title")}}Update query params to sort by title.{{/link-to}}</li>
+      <li>Model was <em>not</em> refreshed; full transition <em>not</em> performed.</li>
+      <li>Items should reorder into alphabetical order.</li>
+      <li>No focus should be set.</li>
+
+      <li>{{#link-to "feed" (query-params filter="messages")}}Update query params to filter on the <em>Messages</em> type.{{/link-to}}</li>
+      <li>Model was refreshed; full transition performed.</li>
+      <li>Only <em>Messages</em> items should displayed.</li>
+      <li>Focus should be set to a block which begins with the "Feed" header.</li>
+
+      <li>{{#link-to "feed" (query-params sort="createdAt" direction="desc")}}Update query params to sort by date, newest to oldest.{{/link-to}}</li>
+      <li>Model was <em>not</em> refreshed; full transition <em>not</em> performed.</li>
+      <li>Items should reorder into reverse chronological order.</li>
+      <li>No focus should be set.</li>
+
       <li><button {{action "reload"}}>Hard Reload</button></li>
       <li>The application should load correctly and begin reading at the top of the page.</li>
       <li>No focus should have been set.</li>
-      <li>Only <i>Messages</i> items should displayed -- and they should be sorted by the most recent creation date.</li>
     </ol>
 
     <h3>Loading Routes</h3>
