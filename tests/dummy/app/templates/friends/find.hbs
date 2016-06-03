@@ -1,0 +1,8 @@
+<h4>We found some users that you might want to connect with</h4>
+
+<ul class="friends-list">
+  {{#each model as |suggestedFriend|}}
+    <li class="friends-list__friend">{{suggestedFriend.name}}</li>
+    {{!-- TODO: Pics? --}}
+  {{/each}}
+</ul>

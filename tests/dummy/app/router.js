@@ -6,7 +6,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   // Routes to test reading.
   this.route('feed');
   this.route('profile');
@@ -33,6 +32,9 @@ Router.map(function() {
     this.route('boom');
   });
 
+  this.route('friends', function () {
+    this.route('find');
+  });
 });
 
 export default Router;

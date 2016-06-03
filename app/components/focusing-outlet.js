@@ -6,6 +6,7 @@ const { get } = Ember;
 let scrollLeft = 0;
 let scrollTop = 0;
 let handler = function(e) {
+  console.log(`Captured scroll event. Scrolling to (${scrollLeft}, ${scrollTop})`);
   window.scrollTo(scrollLeft, scrollTop);
   window.removeEventListener('scroll', handler);
 };
@@ -33,6 +34,7 @@ let FocusingOutlet = Ember.Component.extend({
     let shouldFocus = this.get('shouldFocus');
 
     if (shouldFocus) {
+
       // One shouldn't set an attribute when they mean to set a property.
       // Except when a property is only settable if the attribute is present.
       // We have to make the element interactive prior to focusing it.
@@ -47,7 +49,13 @@ let FocusingOutlet = Ember.Component.extend({
       window.addEventListener('scroll', handler);
 
       // Set the focus to the target outlet wrapper.
-      Ember.run.schedule('afterRender', this, function() { this.element.focus(); });
+      Ember.run.schedule('afterRender', () => {
+        this.element.focus();
+
+        // TODO: Investigate why this doesn't appear to be working inside of outlets with overflow:auto
+        window.scrollTo(scrollLeft, scrollTop);
+      });
+
     } else {
       this.element.removeAttribute('tabindex');
       this.element.removeAttribute('role');
