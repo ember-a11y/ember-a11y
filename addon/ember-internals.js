@@ -35,7 +35,7 @@ export function registerKeywords() {
             outletState: env.outletState[outletName]
         }};
 
-        if (!!Stream) {
+        if (Stream) {
           stream = new Stream(function() {
             return source.identity;
           });
