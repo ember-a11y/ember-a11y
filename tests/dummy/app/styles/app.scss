@@ -14,11 +14,12 @@ ul > li {
   line-height: 1.75;
 }
 
+/* TODO: Ideally, we can have our base components/patterns in their own importable _x.scss partials */
 .button {
   display: inline-block;
   padding: 0.7em 1.2em;
   border-radius: 0.25em;
-  color: $color__off-white;
+  color: $theme-color__primary-1-dark;
   border: 1px solid;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
   border-color: $theme-color__orange-light;
@@ -49,13 +50,13 @@ ul > li {
 
 .hero-section {
   height: 13rem;
-  background-color: $theme-color__orange-medium;
-  color: white;
+  background-color: $theme-color__secondary-1-light;
+  color: $theme-color__primary-1-medium;
   position: relative;
 }
 
 .hero-section__heading {
-  color: white;
+  color: $theme-color__primary-1-medium;
 }
 
 .hero-section__nav-menu {
@@ -83,14 +84,22 @@ ul > li {
 
 .hero-section__nav-link {
   text-decoration: none;
-  color: white;
+  color: $theme-color__primary-1-medium;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: $theme-color__orange-medium;
   margin: 0;
   line-height: 2.25;
 }
+/* less contrast is needed for larger fonts */
+h1, h2, h3 {
+  color: $theme-color__orange-medium;
+}
+/* more contrast is needed for smaller fonts */
+h4, h5, h6 {
+  color: $theme-color__orange-dark;
+}
+
 
 .focusing-outlet:focus {
   outline: yellow auto 5px;
