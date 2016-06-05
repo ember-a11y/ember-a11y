@@ -1,169 +1,200 @@
 <div class="colset">
   <div class="column">
-    <h1>Social Network Lite</h1>
-    <nav>
-      <ul>
-        <li>{{#link-to "index"}}Home{{/link-to}}</li>
-        <li>{{#link-to "messages"}}Messages{{/link-to}}</li>
-        <li>{{#link-to "feed"}}Feed{{/link-to}}</li>
-        <li>{{#link-to "profile"}}Profile{{/link-to}}</li>
-      </ul>
-    </nav>
+    <section class="content hero-section">
+      <h1 class="hero-section__heading">Social Network Lite</h1>
+      <nav class="hero-section__nav-menu">
+        <ul class="hero-section__nav-list">
+          <li class="hero-section__nav-item">{{#link-to "index" class="hero-section__nav-link"}}Home{{/link-to}}</li>
+          <li class="hero-section__nav-item">{{#link-to "messages" class="hero-section__nav-link"}}Messages{{/link-to}}</li>
+          <li class="hero-section__nav-item">{{#link-to "feed" class="hero-section__nav-link"}}Feed{{/link-to}}</li>
+          <li class="hero-section__nav-item">{{#link-to "profile" class="hero-section__nav-link"}}Profile{{/link-to}}</li>
+        </ul>
+      </nav>
+    </section>
 
     {{focusing-outlet}}
   </div>
   <div class="column">
-    <h1>Testing Procedure</h1>
-    <p>Since there is no way to automate screen readers for testing, this is an interactive script to help you run all of the tests inside of each screen reader.</p>
+    <section class="content">
+      <h1>Testing Procedure</h1>
+      <p>Since there is no way to automate screen readers for testing, this is an interactive script to help you run all of the tests inside of each screen reader.</p>
 
-    <h2>Tests</h2>
-    <p>Each of these tests should be reviewed in every single OS/AT/Browser combination.</p>
+      <h2>Tests</h2>
+      <p>Each of these tests should be reviewed in every single OS/AT/Browser combination.</p>
 
-    <h3>Deep Linking</h3>
-    <p>These tests are for first-experience reading behavior. You may use your mouse to click through the links in these tests.</p>
+      <h3>Deep Linking</h3>
+      <p>These tests are for first-experience reading behavior. You may use your mouse to click through the links in these tests.</p>
 
-    <h4>Generic Route</h4>
-    <ol>
-      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
-      <li>{{#link-to "messages.message" "Jimmy"}}Visit messages.message as the first page of the application.{{/link-to}}</li>
-      <li><button {{action "reload"}}>Hard Reload</button></li>
-      <li>The application should load correctly and begin reading at the top of the page.</li>
-      <li>No focus should have been set.</li>
-    </ol>
-    {{github-issue title="Deep Linking - Generic Route"}}
+      <h4>Generic Route</h4>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li>{{#link-to "messages.message" "Jimmy"}}Visit messages.message as the first page of the application.{{/link-to}}</li>
+        <li><button class="button" {{action "reload"}}>Hard Reload</button></li>
+        <li>The application should load correctly and begin reading at the top of the page.</li>
+        <li>No focus should have been set.</li>
+      </ol>
 
-    <h4>Error, Sibling Error Route, Top Level</h4>
-    <ol>
-      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
-      <li><a href="{{model.prefix}}boom">Visit boom as the first page of the application.</a></li>
-      <li><button {{action "reload"}}>Hard Reload</button></li>
-      <li>The application should load correctly and begin reading at the top of the page.</li>
-      <li>Content should include "Global Error".</li>
-      <li>No focus should have been set.</li>
-    </ol>
-    {{github-issue title="Deep Linking - Error, Sibling Error Route, Top Level"}}
+      {{github-issue title="Deep Linking - Generic Route"}}
 
-    <h4>Error, Error Substate, Top Level</h4>
-    <ol>
-      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
-      <li><a href="{{model.prefix}}boomsubstate">Visit boomsubstate as the first page of the application.</a></li>
-      <li><button {{action "reload"}}>Hard Reload</button></li>
-      <li>The application should load correctly and begin reading at the top of the page.</li>
-      <li>Content should include "Boom Substate Error".</li>
-      <li>No focus should have been set.</li>
-    </ol>
-    {{github-issue title="Deep Linking - Error, Error Substate, Top Level"}}
+      <h4>Error, Sibling Error Route, Top Level</h4>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li><a href="{{model.prefix}}boom">Visit boom as the first page of the application.</a></li>
+        <li><button class="button" {{action "reload"}}>Hard Reload</button></li>
+        <li>The application should load correctly and begin reading at the top of the page.</li>
+        <li>Content should include "Global Error".</li>
+        <li>No focus should have been set.</li>
+      </ol>
 
-    <h4>Error, Sibling Error Route, Nested</h4>
-    <ol>
-      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
-      <li><a href="{{model.prefix}}parent/boom">Visit parent.boom as the first page of the application.</a></li>
-      <li><button {{action "reload"}}>Hard Reload</button></li>
-      <li>The application should load correctly and begin reading at the top of the page.</li>
-      <li>Content should include "Parent Error".</li>
-      <li>No focus should have been set.</li>
-    </ol>
-    {{github-issue title="Deep Linking - Error, Sibling Error Route, Nested"}}
+      {{github-issue title="Deep Linking - Error, Sibling Error Route, Top Level"}}
 
-    <h4>Error, Error Substate, Nested</h4>
-    <ol>
-      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
-      <li><a href="{{model.prefix}}parent/boomsubstate">Visit parent.boomsubstate as the first page of the application.</a></li>
-      <li><button {{action "reload"}}>Hard Reload</button></li>
-      <li>The application should load correctly and begin reading at the top of the page.</li>
-      <li>Content should include "Boom Substate Error".</li>
-      <li>No focus should have been set.</li>
-    </ol>
-    {{github-issue title="Deep Linking - Error, Error Substate, Nested"}}
+      <h4>Error, Error Substate, Top Level</h4>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li><a href="{{model.prefix}}boomsubstate">Visit boomsubstate as the first page of the application.</a></li>
+        <li><button class="button" {{action "reload"}}>Hard Reload</button></li>
+        <li>The application should load correctly and begin reading at the top of the page.</li>
+        <li>Content should include "Boom Substate Error".</li>
+        <li>No focus should have been set.</li>
+      </ol>
 
-    <h4>Error, Global Error Only, Nested</h4>
-    <ol>
-      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
-      <li><a href="{{model.prefix}}iso-parent/boom">Visit iso-parent.boom as the first page of the application.</a></li>
-      <li><button {{action "reload"}}>Hard Reload</button></li>
-      <li>The application should load correctly and begin reading at the top of the page.</li>
-      <li>Content should include "Global Error".</li>
-      <li>No focus should have been set.</li>
-    </ol>
-    {{github-issue title="Deep Linking - Error, Global Error Only, Nested"}}
+      {{github-issue title="Deep Linking - Error, Error Substate, Top Level"}}
 
-    <h3>Reading Behavior</h3>
-    <p>These tests are for reading behavior. You may use your mouse to click through the links in this test.</p>
+      <h4>Error, Sibling Error Route, Nested</h4>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li><a href="{{model.prefix}}parent/boom">Visit parent.boom as the first page of the application.</a></li>
+        <li><button class="button" {{action "reload"}}>Hard Reload</button></li>
+        <li>The application should load correctly and begin reading at the top of the page.</li>
+        <li>Content should include "Parent Error".</li>
+        <li>No focus should have been set.</li>
+      </ol>
 
-    <h4>General</h4>
-    <ol>
-      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
-      <li>{{#link-to "messages"}}Load the messages route.{{/link-to}}</li>
-      <li>AT should begin reading the content, beginning with "Messages".</li>
-      <li>{{#link-to "feed"}}Load the feed route.{{/link-to}}</li>
-      <li>AT should begin reading the content, beginning with "Feed".</li>
-      <li>{{#link-to "messages.message" "Jimmy"}}Deep link into a messages child route.{{/link-to}}</li>
-      <li>AT should begin reading the content, beginning with "Messages".</li>
-      <li>{{#link-to "messages"}}Load the messages route.{{/link-to}}</li>
-      <li>AT should begin reading the content, beginning with "Conversations".</li>
-    </ol>
-    {{github-issue title="Reading Behavior"}}
+      {{github-issue title="Deep Linking - Error, Sibling Error Route, Nested"}}
 
-    <h3>Focus Ordering</h3>
-    <p>This test is for focus ordering. You must complete this test using solely the assistive technology you're using. Complete these tasks only using previous and next navigation in your assistive tech. Do not use landmark navigation.</p>
-    <ol>
-      <li><button {{action "resetDemo"}}>Reset Demo</button></li>
-      <li>Enter the content area.</li>
-      <li>Click the "Feed" link.</li>
-      <li>Focus should be set to a block which begins with the "Feed" header.</li>
-      <li>AT should begin reading the content, beginning with "Feed".</li>
-      <li>Navigate to the next item.</li>
-      <li>Virtual cursor focus should be set to the first bullet.</li>
-      <li>Click the "Messages" link.</li>
-      <li>Focus should be set to a block which begins with the "Messages" header.</li>
-      <li>AT should begin reading the content, beginning with "Messages".</li>
-      <li>Navigate to the next item.</li>
-      <li>Virtual cursor focus should be set to the "Conversations" header.</li>
-      <li>Click the "Conversation with Jimmy" link.</li>
-      <li>Focus should be set to a block which begins with the "Thread with Jimmy" header.</li>
-      <li>AT should begin reading the content, beginning with "Thread with Jimmy".</li>
-      <li>Navigate to the next item.</li>
-      <li>Virtual cursor focus should be set to the "Back to message list." link.</li>
-      <li>Click the "Back to message list." link.</li>
-      <li>Focus should be set to a block which begins with the "Conversations" header.</li>
-      <li>AT should begin reading the content, beginning with "Conversations".</li>
-      <li>Navigate to the next item.</li>
-      <li>Virtual cursor focus should be set to the "Conversation with Jimmy" link.</li>
-    </ol>
-    {{github-issue title="Focus Ordering"}}
+      <h4>Error, Error Substate, Nested</h4>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li><a href="{{model.prefix}}parent/boomsubstate">Visit parent.boomsubstate as the first page of the application.</a></li>
+        <li><button class="button" {{action "reload"}}>Hard Reload</button></li>
+        <li>The application should load correctly and begin reading at the top of the page.</li>
+        <li>Content should include "Boom Substate Error".</li>
+        <li>No focus should have been set.</li>
+      </ol>
 
-    <h3>Query Params</h3>
-    <p>Scenarios to write:</p>
-    <ul>
-      <li>Refreshing model</li>
-      <li>Non-refreshing model</li>
-    </ul>
+      {{github-issue title="Deep Linking - Error, Error Substate, Nested"}}
 
-    <h3>Loading Routes</h3>
-    <p>Scenarios to write:</p>
-    <ul>
-      <li>
-        Deep link and navigating to a route which loads slowly triggering:
-        <ul>
-          <li>Cascading loading states.</li>
-          <li>/loading (child route) and _loading (substate).</li>
-          <li>Slow loading, but no loading state.</li>
-        </ul>
-      </li>
-    </ul>
+      <h4>Error, Global Error Only, Nested</h4>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li><a href="{{model.prefix}}iso-parent/boom">Visit iso-parent.boom as the first page of the application.</a></li>
+        <li><button class="button" {{action "reload"}}>Hard Reload</button></li>
+        <li>The application should load correctly and begin reading at the top of the page.</li>
+        <li>Content should include "Global Error".</li>
+        <li>No focus should have been set.</li>
+      </ol>
+      {{github-issue title="Deep Linking - Error, Global Error Only, Nested"}}
 
-    <h3>Transition Changes</h3>
-    <p>Scenarios to write:</p>
-    <ul>
-      <li>Trigger of abort mid-transition.</li>
-      <li>Trigger of redirect mid-transition.</li>
-      <li>Trigger of abort and then starting a new transition.</li>
-      <li>Retrying of a previous transition.</li>
-    </ul>
+      <h3>Reading Behavior</h3>
+      <p>These tests are for reading behavior. You may use your mouse to click through the links in this test.</p>
 
-    <h3>Edge Cases</h3>
-    <p>These are scenarios which have caused issues in certain OS/AT/Browser stacks in the past and are captured here to monitor for regressions.</p>
+      <h4>General</h4>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li>{{#link-to "messages"}}Load the messages route.{{/link-to}}</li>
+        <li>AT should begin reading the content, beginning with "Messages".</li>
+        <li>{{#link-to "feed"}}Load the feed route.{{/link-to}}</li>
+        <li>AT should begin reading the content, beginning with "Feed".</li>
+        <li>{{#link-to "messages.message" "Jimmy"}}Deep link into a messages child route.{{/link-to}}</li>
+        <li>AT should begin reading the content, beginning with "Messages".</li>
+        <li>{{#link-to "messages"}}Load the messages route.{{/link-to}}</li>
+        <li>AT should begin reading the content, beginning with "Conversations".</li>
+      </ol>
+      {{github-issue title="Reading Behavior"}}
 
+      <h3>Focus Ordering</h3>
+      <p>This test is for focus ordering. You must complete this test using solely the assistive technology you're using. Complete these tasks only using previous and next navigation in your assistive tech. Do not use landmark navigation.</p>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li>Enter the content area.</li>
+        <li>Click the "Feed" link.</li>
+        <li>Focus should be set to a block which begins with the "Feed" header.</li>
+        <li>AT should begin reading the content, beginning with "Feed".</li>
+        <li>Navigate to the next item.</li>
+        <li>Virtual cursor focus should be set to the first bullet.</li>
+        <li>Click the "Messages" link.</li>
+        <li>Focus should be set to a block which begins with the "Messages" header.</li>
+        <li>AT should begin reading the content, beginning with "Messages".</li>
+        <li>Navigate to the next item.</li>
+        <li>Virtual cursor focus should be set to the "Conversations" header.</li>
+        <li>Click the "Conversation with Jimmy" link.</li>
+        <li>Focus should be set to a block which begins with the "Thread with Jimmy" header.</li>
+        <li>AT should begin reading the content, beginning with "Thread with Jimmy".</li>
+        <li>Navigate to the next item.</li>
+        <li>Virtual cursor focus should be set to the "Back to message list." link.</li>
+        <li>Click the "Back to message list." link.</li>
+        <li>Focus should be set to a block which begins with the "Conversations" header.</li>
+        <li>AT should begin reading the content, beginning with "Conversations".</li>
+        <li>Navigate to the next item.</li>
+        <li>Virtual cursor focus should be set to the "Conversation with Jimmy" link.</li>
+      </ol>
+
+      {{github-issue "Focus Ordering"}}
+
+      <h3>Query Params</h3>
+      <p>These tests are for focusing behavior. You may use your mouse to click through the links in this test.</p>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li>{{#link-to "feed"}}Load the Feed route.{{/link-to}}</li>
+        <li>Focus should be set to a block which begins with the "Feed" header.</li>
+
+        <li>{{#link-to "feed" (query-params sort="title")}}Update query params to sort by title.{{/link-to}}</li>
+        <li>Model was <em>not</em> refreshed; full transition <em>not</em> performed.</li>
+        <li>Items should reorder into alphabetical order.</li>
+        <li>No focus should be set.</li>
+
+        <li>{{#link-to "feed" (query-params filter="messages")}}Update query params to filter on the <em>Messages</em> type.{{/link-to}}</li>
+        <li>Model was refreshed; full transition performed.</li>
+        <li>Only <em>Messages</em> items should displayed.</li>
+        <li>Focus should be set to a block which begins with the "Feed" header.</li>
+
+        <li>{{#link-to "feed" (query-params sort="createdAt" direction="desc")}}Update query params to sort by date, newest to oldest.{{/link-to}}</li>
+        <li>Model was <em>not</em> refreshed; full transition <em>not</em> performed.</li>
+        <li>Items should reorder into reverse chronological order.</li>
+        <li>No focus should be set.</li>
+
+        <li><button class="button" {{action "reload"}}>Hard Reload</button></li>
+        <li>The application should load correctly and begin reading at the top of the page.</li>
+        <li>No focus should have been set.</li>
+      </ol>
+
+      {{github-issue title="Query Params"}}
+
+      <h3>Loading Routes</h3>
+      <p>Scenarios to write:</p>
+      <ul>
+        <li>
+          Deep link and navigating to a route which loads slowly triggering:
+          <ul>
+            <li>Cascading loading states.</li>
+            <li>/loading (child route) and _loading (substate).</li>
+            <li>Slow loading, but no loading state.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Transition Changes</h3>
+      <p>Scenarios to write:</p>
+      <ul>
+        <li>Trigger of abort mid-transition.</li>
+        <li>Trigger of redirect mid-transition.</li>
+        <li>Trigger of abort and then starting a new transition.</li>
+        <li>Retrying of a previous transition.</li>
+      </ul>
+
+      <h3>Edge Cases</h3>
+      <p>These are scenarios which have caused issues in certain OS/AT/Browser stacks in the past and are captured here to monitor for regressions.</p>
+    </section>
   </div>
 </div>
 <a class="github-fork-ribbon" href="https://github.com/ember-a11y/ember-a11y" title="GitHub Repo">GitHub Repo</a>
