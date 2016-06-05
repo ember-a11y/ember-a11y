@@ -2,5 +2,10 @@
 'use strict';
 
 module.exports = {
-  extends: 'recommended'
+  extends: 'recommended',
+  rules: {
+    'img-alt-attributes': true,
+    'invalid-interactive': true,
+    'nested-interactive': true
+  }
 };
