@@ -7,11 +7,15 @@ let scrollLeft = 0;
 let scrollTop = 0;
 let elemToScrollIntoView = null;
 
-let focusHandler = function({ target: focusedElem }) {
+const focusHandler = function({ target: focusedElem }) {
   console.log(`Captured scroll event on ${focusedElem}. Scrolling to (${scrollLeft}, ${scrollTop})`);
-
+  debugger;
   window.scrollTo(scrollLeft, scrollTop);
-  window.removeEventListener('focus', focusHandler);
+  focusedElem.removeEventListener('focus', focusHandler);
+};
+
+const focusElement = function focusElement() {
+  this.element.focus();
 };
 
 let FocusingOutlet = Ember.Component.extend({
@@ -44,21 +48,27 @@ let FocusingOutlet = Ember.Component.extend({
       this.element.setAttribute('tabindex', '-1');
       this.element.setAttribute('role', 'group');
 
+
+      // -------------------
+      // Set the focus to the target outlet wrapper and handle the event that's fired from doing so.
       // If we don't do this, the scroll triggered by the focus will be unfortunate.
       // This effectively swallows one scroll event.
       // TODO: Investigate setting focus to something inside of overflow: auto;
+      // -------------------
 
       // TODO: Do we cache document.body.scrollTop, or the current scroll position of the
       // focusing outlet's container?
       scrollLeft = document.body.scrollLeft;
       scrollTop = document.body.scrollTop;
 
-      window.addEventListener('focus', focusHandler);
+      this.element.addEventListener('focus', focusHandler);
 
-      // Set the focus to the target outlet wrapper.
-      Ember.run.scheduleOnce('afterRender', () => {
-        this.element.focus();
-      });
+      // Calling `this.element.focus()` directly (without scheduling it on the `afterRender` queue,
+      // skips the scrolling behavior that would otherwise take place in an element
+      // with overflow: auto)
+      this.element.focus();
+      // uncomment the line below (and comment out the line above) to compare behavior
+      // Ember.run.scheduleOnce('afterRender', this, focusElement);
 
     } else {
       this.element.removeAttribute('tabindex');
