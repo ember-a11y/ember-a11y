@@ -45,7 +45,7 @@ ul > li {
 }
 
 .content {
-  padding: 0 10px;
+  padding: 0.5em 0.8em;
 }
 
 .hero-section {
@@ -102,8 +102,7 @@ h4, h5, h6 {
 
 
 .focusing-outlet:focus {
-  outline: yellow auto 5px;
-  outline: -webkit-focus-ring-color auto 5px;
+  outline: $theme-color__primary-1-dark auto 0.25em;
 }
 
 @import 'gh-fork-ribbon';
