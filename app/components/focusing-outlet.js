@@ -53,7 +53,7 @@ let FocusingOutlet = Ember.Component.extend({
       scrollLeft = document.body.scrollLeft;
       scrollTop = document.body.scrollTop;
 
-      this.element.addEventListener('focus', focusHandler);
+      window.addEventListener('focus', focusHandler);
 
       // Set the focus to the target outlet wrapper.
       Ember.run.scheduleOnce('afterRender', () => {
