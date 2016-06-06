@@ -5,10 +5,13 @@ const { get } = Ember;
 
 let scrollLeft = 0;
 let scrollTop = 0;
-let handler = function(e) {
-  console.log(`Captured scroll event. Scrolling to (${scrollLeft}, ${scrollTop})`);
+let elemToScrollIntoView = null;
+
+let focusHandler = function({ target: focusedElem }) {
+  console.log(`Captured scroll event on ${focusedElem}. Scrolling to (${scrollLeft}, ${scrollTop})`);
+
   window.scrollTo(scrollLeft, scrollTop);
-  window.removeEventListener('scroll', handler);
+  window.removeEventListener('focus', focusHandler);
 };
 
 let FocusingOutlet = Ember.Component.extend({
@@ -44,22 +47,30 @@ let FocusingOutlet = Ember.Component.extend({
       // If we don't do this, the scroll triggered by the focus will be unfortunate.
       // This effectively swallows one scroll event.
       // TODO: Investigate setting focus to something inside of overflow: auto;
+
+      // TODO: Do we cache document.body.scrollTop, or the current scroll position of the
+      // focusing outlet's container?
       scrollLeft = document.body.scrollLeft;
       scrollTop = document.body.scrollTop;
-      window.addEventListener('scroll', handler);
+
+      this.element.addEventListener('focus', focusHandler);
 
       // Set the focus to the target outlet wrapper.
-      Ember.run.schedule('afterRender', () => {
+      Ember.run.scheduleOnce('afterRender', () => {
         this.element.focus();
-
-        // TODO: Investigate why this doesn't appear to be working inside of outlets with overflow:auto
-        window.scrollTo(scrollLeft, scrollTop);
       });
 
     } else {
       this.element.removeAttribute('tabindex');
       this.element.removeAttribute('role');
     }
+  },
+
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    // this._removeListeners();  // TODO: Implement
   },
 
   actions: {

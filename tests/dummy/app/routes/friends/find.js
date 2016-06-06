@@ -22,8 +22,6 @@ const users = [
   'Will Hastings'
 ];
 
-const usersToSuggest = 100;
-
 export default Route.extend({
 
   model () {
