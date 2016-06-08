@@ -3,17 +3,17 @@ import getOwner from 'ember-getowner-polyfill';
 
 const { get } = Ember;
 
+// Cache theses inside of `setFocus` so that when we handle the focusing, we
+// can set the outlet to its original, (pre-focused) position.
 let scrollLeft = 0;
 let scrollTop = 0;
-let handler = function(e) {
-  window.scrollTo(scrollLeft, scrollTop);
-  window.removeEventListener('scroll', handler);
-};
 
-let FocusingOutlet = Ember.Component.extend({
+const FocusingOutlet = Ember.Component.extend({
   positionalParams: ['inputOutletName'], // needed for Ember 1.13.[0-5] and 2.0.0-beta.[1-3] support
   tagName: 'div',
   classNames: ['focusing-outlet'],
+
+  _handleScrollAfterFocus: null,
 
   shouldFocus: false,
 
@@ -24,7 +24,15 @@ let FocusingOutlet = Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
+
+    this._initEventHandlers();
     this.setFocus();
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    this._removeEventHandlers();
   },
 
   setFocus() {
@@ -44,7 +52,8 @@ let FocusingOutlet = Ember.Component.extend({
       // TODO: Investigate setting focus to something inside of overflow: auto;
       scrollLeft = document.body.scrollLeft;
       scrollTop = document.body.scrollTop;
-      window.addEventListener('scroll', handler);
+
+      window.addEventListener('scroll', this.get('_handleScrollAfterFocus'));
 
       // Set the focus to the target outlet wrapper.
       Ember.run.schedule('afterRender', this, function() { this.element.focus(); });
@@ -81,6 +90,18 @@ let FocusingOutlet = Ember.Component.extend({
 
       this.setFocus();
     }
+  },
+
+  _initEventHandlers () {
+    this._handleScrollAfterFocus = function handler() {
+      window.scrollTo(scrollLeft, scrollTop);
+      window.removeEventListener('scroll', handler);
+    }
+  },
+
+  _removeEventHandlers () {
+    window.removeEventListener('scroll', this._handleScrollAfterFocus);
+    this.set('_handleScrollAfterFocus', null);
   }
 });
 
