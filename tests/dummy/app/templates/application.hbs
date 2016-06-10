@@ -1,6 +1,7 @@
 <div class="colset">
   <div class="column">
     <section class="content hero-section">
+      <a class="github-fork-ribbon" href="https://github.com/ember-a11y/ember-a11y" title="GitHub Repo">GitHub Repo</a>
       <h1 class="hero-section__heading">Social Network Lite</h1>
       <nav class="hero-section__nav-menu">
         <ul class="hero-section__nav-list">
@@ -186,17 +187,28 @@
       </ul>
 
       <h3>Transition Changes</h3>
-      <p>Scenarios to write:</p>
+      {{!-- <p>Scenarios to write:</p>
       <ul>
         <li>Trigger of abort mid-transition.</li>
         <li>Trigger of redirect mid-transition.</li>
         <li>Trigger of abort and then starting a new transition.</li>
         <li>Retrying of a previous transition.</li>
-      </ul>
+      </ul> --}}
+      <p>
+        Theses scenarios aim to demonstrate how the application is keeing track of
+        transition states during different types of transition events -- as well as
+        whether or not its attempting to handle outlet focusing for those events.
+      </p>
+      <p>Follow the steps below to get started</p>
+      <ol>
+        <li><button class="button" {{action "resetDemo"}}>Reset Demo</button></li>
+        <li>{{#link-to "transition-scenarios"}}Navigate to the transition demo route.{{/link-to}}</li>
+      </ol>
+
+      {{github-issue title="Transition Changes"}}
 
       <h3>Edge Cases</h3>
       <p>These are scenarios which have caused issues in certain OS/AT/Browser stacks in the past and are captured here to monitor for regressions.</p>
     </section>
   </div>
 </div>
-<a class="github-fork-ribbon" href="https://github.com/ember-a11y/ember-a11y" title="GitHub Repo">GitHub Repo</a>

@@ -1,0 +1,84 @@
+.transition-instructions {
+  margin: 1rem;
+
+  /** TODO: Counters in ::after and ARIA Roles **/
+  .transition-instructions__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .transition-instructions__item:not(:last-child) {
+    margin-bottom: 2em;
+  }
+
+  .transition-instructions__item-text {
+    flex-basis: 60%;
+  }
+  .transition-instructions__item-button {
+    flex: 0;
+  }
+}
+
+.transition-report {
+  position: relative;
+  width: 80%;
+  max-width: 50rem;
+  margin: 4rem auto;
+  //padding: 1.2em 1.6em;
+  background-color: white;
+  box-shadow: 0 10px 12px rgba(0,0,0,0.23), 0 6px 40px rgba(0,0,0,0.19);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  transform: scale(0);
+  opacity: 0;
+  transform-origin: center center;
+  transition-property: scale opacity;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); // ease-out-cubic
+
+  &.is-visible {
+    transform: scale(1);
+    opacity: 1;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); // ease-in-cubic
+  }
+}
+
+.transition-report__header {
+  height: 3.25em;
+  border-bottom: 2px solid $theme-color__orange-medium;
+}
+
+.transition-report__header,
+.transition-report__body {
+  padding: 1.2em 1.6em;
+}
+
+
+.transition-report__result-text {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 0.25em;
+}
+
+.transition-report__result-text.success {
+  color: lightgreen;
+}
+.transition-report__result-text.fail {
+  color: red;
+}
+
+.transition-report__result-text-hint {
+  font-size: 0.9em;
+}
+
+.transition-report__clear-button {
+  display: block;
+  margin-top: 3em;
+  margin-right: auto;
+  margin-left: auto;
+  width: 50%;
+}

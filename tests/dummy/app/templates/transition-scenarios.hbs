@@ -1,0 +1,101 @@
+<section class="content">
+
+  <h2>Transition States Demo</h2>
+
+  <h4 class="u-align-center">States to Simulate</h4>
+  <div class="transition-instructions">
+
+    <div class="transition-instructions__item">
+      <span class="transition-instructions__item-text">A transition that will abort mid-flight:</span>
+      <span class="transition-instructions__item-button u-align-center">
+        {{#unless model.shouldReportResults}}
+          <button class="transition-instructions__try-button button button--md" {{action "triggerTest" "abort"}}>
+              Try It!
+          </button>
+        {{else}}
+          <button class="transition-instructions__try-button button button--md" {{action "clearResults"}}>
+              Clear Results
+          </button>
+        {{/unless}}
+      </span>
+    </div>
+
+    <div class="transition-instructions__item">
+      <span class="transition-instructions__item-text">A transition that will redirect mid-flight:</span>
+      <span class="transition-instructions__item-button u-align-center">
+        {{#unless model.shouldReportResults}}
+          <button class="transition-instructions__try-button button button--md" {{action "triggerTest" "redirect"}}>
+              Try It!
+          </button>
+        {{else}}
+          <button class="transition-instructions__try-button button button--md" {{action "clearResults"}}>
+              Clear Results
+          </button>
+        {{/unless}}
+      </span>
+    </div>
+
+    <div class="transition-instructions__item">
+      <span class="transition-instructions__item-text">A transition that will abort mid-flight, then (successfully) attempt a new transition:</span>
+      <span class="transition-instructions__item-button u-align-center">
+        {{#unless model.shouldReportResults}}
+          <button class="transition-instructions__try-button button button--md" {{action "triggerTest" "abortAndStartNew"}}>
+              Try It!
+          </button>
+        {{else}}
+          <button class="transition-instructions__try-button button button--md" {{action "clearResults"}}>
+              Clear Results
+          </button>
+        {{/unless}}
+      </span>
+    </div>
+
+    <div class="transition-instructions__item">
+      <span class="transition-instructions__item-text">A transition that will abort, and then (successfully) retry:</span>
+      <span class="transition-instructions__item-button u-align-center">
+        {{#unless model.shouldReportResults}}
+          <button class="transition-instructions__try-button button button--md" {{action "triggerTest" "abortAndRetry"}}>
+              Try It!
+          </button>
+        {{else}}
+          <button class="transition-instructions__try-button button button--md" {{action "clearResults"}}>
+              Clear Results
+          </button>
+        {{/unless}}
+      </span>
+    </div>
+
+  </div>
+
+  <section class="transition-report {{if model.shouldReportResults 'is-visible'}}">
+
+    <header class="transition-report__header flex-grid flex-grid--justiftyCenter flex-grid--center">
+      <h2 class="grid-cell u-align-center">Transition Simulation Result</h2>
+    </header>
+
+    <section class="transition-report__body">
+      <h3>Transition Path</h3>
+      <ol>
+        {{#each model.transitionHistory as |transition|}}
+          <li>{{transition.targetName}}</li>
+        {{/each}}
+      </ol>
+
+
+      <h3>Did the outlet check if it should focus?</h3>
+      <p class="transition-report__focus-check u-align-center">
+        <span class="transition-report__result-text {{if model.reporter.focusCheckError 'fail' 'success'}}">
+          {{affirm model.reporter.checkedToFocus}}
+        </span>
+        <span class="transition-report__result-text-hint"><i>(It {{#if model.reporter.shouldNotHaveCheckForFocus}}shouldn't{{else}}should{{/if}} have)</i></span>
+      </p>
+
+      <button class="transition-report__clear-button button" {{action "clearResults"}}>Clear Results</button>
+    </section>
+
+  </section>
+
+
+
+  {{focusing-outlet}}
+</section>

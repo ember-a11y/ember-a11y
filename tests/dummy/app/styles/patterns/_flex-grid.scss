@@ -1,0 +1,142 @@
+.flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+
+  .grid-cell {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+    box-sizing: border-box;
+  }
+
+  /* ------------ FLEX SETTINGS PER CELL (on an o-flex-grid's direct child .grid-cell) ------------- */
+   > .grid-cell--grow-none {
+     flex: 0 0 0%;
+   }
+   > .grid-cell--grow-one {
+     flex: 1 0 0%;
+   }
+   > .grid-cell--flex-none {
+     flex: none;
+   }
+   > .grid-cell--auto {
+     flex: 0 0 auto;
+   }
+
+
+  &.flex-grid--noWrap {
+    flex-wrap: nowrap;
+  }
+
+  /* With flex cells */
+  &.flex-grid--flex-cells {
+    > .grid-cell {
+      display: flex;
+    }
+  }
+
+  /* ------------ ALIGNMENT PER ROW ------------- */
+  &.flex-grid--top {
+    align-items: flex-start;
+  }
+  &.flex-grid--bottom {
+    align-items: flex-end;
+  }
+  &.flex-grid--center {
+    align-items: center;
+  }
+  &.flex-grid--justifyStart {
+    justify-content: flex-start;
+  }
+  &.flex-grid--justifyCenter {
+    justify-content: center;
+  }
+  &.flex-grid--justifyEnd {
+    justify-content: flex-end;
+  }
+  &.flex-grid--spaceAround {
+    justify-content: space-around;
+  }
+  &.flex-grid--spaceBetween {
+    justify-content: space-between;
+  }
+
+
+
+  /* ------------ ALIGNMENT PER CELL ------------- */
+  .grid-cell--top {
+    align-self: flex-start;
+  }
+  .grid-cell--bottom {
+    align-self: flex-end;
+  }
+  .grid-cell--center {
+    align-self: center;
+  }
+  .grid-cell--autoSize {
+    flex: none;
+  }
+
+
+  /* ------------ CUSTOM CELL SIZING ------------- */
+  &.flex-grid--fit {
+    > .grid-cell {
+      flex: 1;
+    }
+  }
+  &.flex-grid--full {
+    > .grid-cell {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  &.flex-grid--auto {
+    > .grid-cell {
+      flex: 0 0 auto;
+    }
+  }
+  &.flex-grid--oneHalf {
+    > .grid-cell {
+      flex: 0 0 50%;
+    }
+  }
+  &.flex-grid--oneThird {
+    > .grid-cell {
+      flex: 0 0 33.33333%;
+    }
+  }
+  &.flex-grid--oneQuarter {
+    > .grid-cell {
+      flex: 0 0 25%;
+    }
+  }
+
+
+  /* ------------ WITH GUTTERS ------------- */
+  &.flex-grid--gutters {
+    margin: -1em 0 0 -1em;
+
+    > .grid-cell {
+      padding: 1em 0 0 1em;
+    }
+  }
+  &.flex-grid--guttersLg {
+    margin: -1.5em 0 0 -1.5em;
+
+    > .grid-cell {
+      padding: 1.5em 0 0 1.5em;
+    }
+  }
+  &.flex-grid--guttersXl {
+    margin: -2em 0 0 -2em;
+
+    > .grid-cell {
+      padding: 2em 0 0 2em;
+    }
+  }
+
+}

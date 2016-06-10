@@ -14,20 +14,6 @@ ul > li {
   line-height: 1.75;
 }
 
-/* TODO: Ideally, we can have our base components/patterns in their own importable _x.scss partials */
-.button {
-  display: inline-block;
-  padding: 0.7em 1.2em;
-  border-radius: 0.25em;
-  color: $theme-color__primary-1-dark;
-  border: 1px solid;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
-  border-color: $theme-color__orange-light;
-  border-top-color: $theme-color__orange-light;
-  border-bottom-color: $theme-color__orange-dark;
-  background-image: linear-gradient(to bottom, $theme-color__orange-light, $theme-color__orange-medium);
-}
-
 .colset {
   position: absolute;
   width: 100%; height: 100%;
@@ -45,7 +31,7 @@ ul > li {
 }
 
 .content {
-  padding: 0.5em 0.8em;
+  padding: 0 10px;
 }
 
 .hero-section {
@@ -102,9 +88,22 @@ h4, h5, h6 {
 
 
 .focusing-outlet:focus {
-  outline: $theme-color__primary-1-dark auto 0.25em;
+  outline: yellow auto 5px;
+  outline: -webkit-focus-ring-color auto 5px;
 }
 
 @import 'gh-fork-ribbon';
 
-.github-fork-ribbon { right: 50%; }
+
+/* Utilities: Groups of Single-purpose helpers
+/* ---------------------------------------------------------- */
+@import 'utilities/positioning';
+
+/* Patterns: Groups of Generic Styles
+/* ---------------------------------------------------------- */
+@import 'patterns/buttons';
+@import 'patterns/flex-grid';
+
+/* Layouts: Groups of Components and Page Styles
+/* ---------------------------------------------------------- */
+@import 'layouts/transition-scenarios';

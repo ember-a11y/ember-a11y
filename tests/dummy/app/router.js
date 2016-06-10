@@ -33,6 +33,13 @@ Router.map(function() {
     this.route('boom');
   });
 
+  // Routes to test transition handling
+  this.route('transition-scenarios', function () {
+    this.route('abort-mid');
+    this.route('redirect-mid');
+    this.route('success-destination');
+  });
+
 });
 
 export default Router;
