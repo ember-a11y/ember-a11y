@@ -9,7 +9,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember try:testall",
+    "test": "ember try:each",
     "demo": "git stash && ember github-pages:commit --message \"Update demo application.\" && git push origin gh-pages:gh-pages && git stash pop"
   },
   "repository": {
@@ -23,8 +23,8 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
-    "ember-ajax": "0.7.1",
-    "ember-cli": "2.5.1",
+    "ember-ajax": "^2.0.1",
+    "ember-cli": "2.6.1",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "^1.2.0",
@@ -35,8 +35,8 @@
     "ember-cli-inject-live-reload": "^1.4.0",
     "ember-cli-qunit": "^1.4.0",
     "ember-cli-release": "0.2.8",
-    "ember-cli-sri": "^2.1.0",
     "ember-cli-sass": "^5.3.0",
+    "ember-cli-sri": "^2.1.0",
     "ember-cli-template-lint": "0.4.10",
     "ember-cli-uglify": "^1.2.0",
     "ember-disable-prototype-extensions": "^1.1.0",
@@ -44,7 +44,6 @@
     "ember-getowner-polyfill": "1.0.1",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
-    "ember-try": "^0.2.2",
     "loader.js": "^4.0.1"
   },
   "keywords": [
