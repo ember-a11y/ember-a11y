@@ -6,7 +6,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   // Routes to test reading.
   this.route('feed');
   this.route('profile');
@@ -33,6 +32,12 @@ Router.map(function() {
     this.route('boom');
   });
 
+  this.route('transition-root', function() {
+    this.route('abort');
+    this.route('abort-new', {path: 'abort-new/:target'});
+    this.route('abort-retry');
+    this.route('redirect', {path: 'redirect/:target'});
+  });
 });
 
 export default Router;

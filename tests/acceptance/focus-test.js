@@ -103,3 +103,36 @@ test('Should load leaf routes with a spurious focusing outlet without any errors
   visit('/about');
   andThen(() => { assert.equal(checkFocus(), 'About Us'); });
 });
+
+test('Transition abort and redirect behavior.', function(assert) {
+  // transition.abort();
+  visit('/');
+  visit('/messages');
+  visit('/transition-root/abort');
+  andThen(() => { assert.equal(checkFocus(), 'Messages'); });
+
+  // this.transitionTo('feed');
+  visit('/');
+  visit('/transition-root/redirect/feed');
+  andThen(() => { assert.equal(checkFocus(), 'Feed'); });
+
+  // this.transitionTo('transition-root.abort'); transition.abort();
+  visit('/');
+  visit('/transition-root/redirect/transition-root.abort');
+  andThen(() => { assert.equal(checkFocus(), 'Home Page'); });
+
+  // transition.abort(); this.transitionTo('feed');
+  visit('/');
+  visit('/transition-root/abort-new/feed');
+  andThen(() => { assert.equal(checkFocus(), 'Feed'); });
+
+  // transition.abort(); this.transitionTo('transition-root.abort'); transition.abort();
+  visit('/');
+  visit('/transition-root/abort-new/transition-root.abort');
+  andThen(() => { assert.equal(checkFocus(), 'Home Page'); });
+
+  // transition.abort(); transition.retry();
+  visit('/transition-root');
+  visit('/transition-root/abort-retry');
+  andThen(() => { assert.equal(checkFocus(), 'Abort Retry'); });
+});
