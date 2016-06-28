@@ -14,6 +14,8 @@ The current implementation of this addon will immediately apply focus to the mos
 
 In your templates you would then swap in `{{focusing-outlet}}` for `{{outlet}}` wherever it may occur.
 
+[You also need to ensure that your application's router is not set to use `locationType: 'hash'`.](https://github.com/ember-a11y/ember-a11y/issues/2) Set `ENV.locationType` appropriately inside of `config/environment.js`.
+
 ## Demo Application
 
 Included in this addon is a demo application for testing.
