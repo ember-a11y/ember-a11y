@@ -7,6 +7,7 @@ body {
   background-color: $background-color__primary;
   color: $font-color__primary;
   font-family: $font-family-stack;
+  scroll-behavior: smooth;
 }
 
 ol > li,
@@ -120,4 +121,4 @@ h4, h5, h6 {
 //.github-fork-ribbon { right: 50%; }
 
 
-@import 'layouts/find-friends';
+@import 'layouts/_layouts';

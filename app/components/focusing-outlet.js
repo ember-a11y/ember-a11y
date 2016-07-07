@@ -7,10 +7,18 @@ let scrollLeft = 0;
 let scrollTop = 0;
 let elemToScrollIntoView = null;
 
-const focusHandler = function({ target: focusedElem }) {
+const focusHandler = function(event) {
+  const focusedElem = event.target;
+
   console.log(`Captured scroll event on ${focusedElem}. Scrolling to (${scrollLeft}, ${scrollTop})`);
   debugger;
-  window.scrollTo(scrollLeft, scrollTop);
+
+  if (typeof window !== 'undefined' && typeof window.scrollTo === 'function') {
+    event.preventDefault();
+    // window.scrollTo(scrollLeft, scrollTop);
+    window.scrollTo({ behavior: 'smooth', top: focusedElem.offsetTop * 2 });
+  }
+
   focusedElem.removeEventListener('focus', focusHandler);
 };
 
