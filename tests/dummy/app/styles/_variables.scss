@@ -5,18 +5,18 @@ $color__off-white: #FFFAF1;
 /* Ember Orange */
 $theme-color__orange-light: #FF9684;
 $theme-color__orange-medium: #FF5538;
-$theme-color__orange-dark: #cc442d;
+$theme-color__orange-dark: #eb4046; 
 
 /* Theme Colors */
 $theme-color__primary-1-light: #ACB7F8;
-$theme-color__primary-1-medium: #42465F;
-$theme-color__primary-1-dark: #1F254A;
+$theme-color__primary-1-medium: #2b2974;
+$theme-color__primary-1-dark: #1F254A; /* dark navy */
 
-$theme-color__secondary-1-light: #71D9A9;
+$theme-color__secondary-1-light: #CFEAE1; /* light mint */
 $theme-color__secondary-1-medium: #ACD1C0;
 $theme-color__secondary-1-dark: #2B5140;
 
-$theme-color__primary-2-light: #91564D;
+$theme-color__primary-2-light: #91564D; 
 $theme-color__primary-2-medium: #451710;
 $theme-color__primary-2-dark: #2B0F0B;
 
@@ -38,6 +38,7 @@ $background-color__primary: $color__off-white;
 $font-family-stack:
       -apple-system,
       BlinkMacSystemFont,
+      'Lato',
       'Segoe UI',
       Roboto,
       'Oxygen',
