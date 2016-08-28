@@ -1,43 +1,44 @@
 @import 'variables';
+@import 'gh-fork-ribbon';
 
 body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
   background-color: $background-color__primary;
   color: $font-color__primary;
   font-family: $font-family-stack;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 ol > li,
 ul > li {
-  line-height: 1.75;
+  line-height: 1.618;
 }
 
 /* TODO: Ideally, we can have our base components/patterns in their own importable _x.scss partials */
 .button {
-  display: inline-block;
-  padding: 0.7em 1.2em;
+  background-image: linear-gradient(to bottom, $theme-color__orange-light, $theme-color__orange-medium);
+  border-bottom-color: $theme-color__orange-dark;
+  border-color: $theme-color__orange-light;
   border-radius: 0.25em;
-  color: $theme-color__primary-1-dark;
+  border-top-color: $theme-color__orange-light;
   border: 1px solid;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
-  border-color: $theme-color__orange-light;
-  border-top-color: $theme-color__orange-light;
-  border-bottom-color: $theme-color__orange-dark;
-  background-image: linear-gradient(to bottom, $theme-color__orange-light, $theme-color__orange-medium);
+  color: $theme-color__primary-1-dark;
+  display: inline-block;
+  padding: 0.7em 1.2em;
 }
 
 .colset {
+  display: flex;
   position: absolute;
   width: 100%; height: 100%;
-  display: flex;
 }
 
 .column {
   box-sizing: border-box;
-  width: 50%;
   overflow: scroll;
+  width: 50%;
 }
 
 .column + .column {
@@ -45,37 +46,46 @@ ul > li {
 }
 
 .content {
-  padding: 0.5em 0.8em;
+  padding: 1.618em;
+  h2 {
+    border-bottom: 1px solid $theme-color__orange-light;
+    margin-bottom: 1em;
+  }
 }
 
 .hero-section {
-  height: 13rem;
   background-color: $theme-color__secondary-1-light;
-  color: $theme-color__primary-1-medium;
+  // color: $theme-color__primary-1-medium;
+  height: 10rem;
   position: relative;
+  h1 {
+    @media screen and (min-width:768px){
+      font-size: 3em;
+    }
+  }
 }
 
-.hero-section__heading {
-  color: $theme-color__primary-1-medium;
-}
+// .hero-section__heading {
+//   color: $theme-color__primary-1-medium;
+// }
 
 .hero-section__nav-menu {
-  position: absolute;
   bottom: 0;
+  position: absolute;
   width: calc(100% - (10px * 2));
 }
 
 .hero-section__nav-list {
-  position: relative;
-  width: 100%;
+  align-items: center;
+  display: flex;
+  height: 3em;
+  justify-content: center;
   list-style-type: none;
-  height: 4rem;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
+  position: relative;
   text-align: center;
-  align-items: center;
+  width: 100%;
 }
 
 .hero-section__nav-item {
@@ -83,28 +93,58 @@ ul > li {
 }
 
 .hero-section__nav-link {
-  text-decoration: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-bottom: 4px solid transparent;
+  // box-shadow: 0 0 1px rgba(0, 0, 0, 0);
   color: $theme-color__primary-1-medium;
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 1px;
+  overflow: hidden;
+  position: relative;
+  padding-bottom:4px;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0); 
+  vertical-align: middle; 
+  -moz-osx-font-smoothing: grayscale;  
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    height: 4px;
+    -webkit-transition-property: left, right;
+    transition-property: left, right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  &:hover, :focus, :active {
+    &:before {
+      left: 0;
+      right: 0;
+      background: $theme-color__primary-1-medium;
+    }
+  }
 }
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  line-height: 2.25;
-}
-/* less contrast is needed for larger fonts */
-h1, h2, h3 {
-  color: $theme-color__orange-medium;
-}
-/* more contrast is needed for smaller fonts */
-h4, h5, h6 {
+h1, h2 {
   color: $theme-color__orange-dark;
 }
-
+h3, h4, h5, h6 {
+  color: $theme-color__primary-1-medium;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  line-height: 1.618;
+}
 
 .focusing-outlet:focus {
   outline: $theme-color__primary-1-dark auto 0.25em;
 }
-
-@import 'gh-fork-ribbon';
-
 .github-fork-ribbon { right: 50%; }
