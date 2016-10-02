@@ -18,11 +18,24 @@ In your templates you would then swap in `{{focusing-outlet}}` for `{{outlet}}` 
 
 ## Demo Application
 
-Included in this addon is a demo application for testing.
+Included in this addon is a demo application for testing `ember-a11y`.
 
-* `ember server`
+You can access it through [Github Pages](http://ember-a11y.github.io/ember-a11y/) or build it from source
+files with the following steps:
+
+* run `ember server`
 * Visit the demo app at [http://localhost:4200](http://localhost:4200).
-* Also available via GitHub Pages [http://ember-a11y.github.io/ember-a11y/](http://ember-a11y.github.io/ember-a11y/)
+
+### Using a Screen Reader
+
+Many of the examples in the demo app are meant to be used alongside a screen reader. A few of our suggestions:
+
+* [VoiceOver](http://www.apple.com/accessibility/osx/voiceover/) (macOS)
+* [JAWS](http://www.freedomscientific.com/Products/Blindness/JAWS)  (Windows)
+* [TalkBack](https://play.google.com/store/apps/details?id=com.google.android.marvin.talkback) (Android)
+- [ChromeVox](http://www.chromevox.com/) (ChromeOS)
+  + Also, check out [ChromeVox Next](http://www.chromevox.com/next.html)
+* [NVDA](http://www.nvaccess.org/) (Windows)
 
 ## Commands
 
