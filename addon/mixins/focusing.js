@@ -1,21 +1,23 @@
-import Ember from "ember";
-import getOwner from 'ember-getowner-polyfill';
+import Ember from 'ember';
 
-const { get } = Ember;
+const {
+  get,
+  Mixin
+} = Ember;
 
 let scrollLeft = 0;
 let scrollTop = 0;
-let handler = function(e) {
+let handler = function() {
   window.scrollTo(scrollLeft, scrollTop);
   window.removeEventListener('scroll', handler);
 };
 
-let FocusingOutlet = Ember.Component.extend({
-  positionalParams: ['inputOutletName'], // needed for Ember 1.13.[0-5] and 2.0.0-beta.[1-3] support
+export default Mixin.create({
   tagName: 'div',
   classNames: ['focusing-outlet'],
 
   shouldFocus: false,
+  currentOutletRouteKeyPrefix: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -56,12 +58,19 @@ let FocusingOutlet = Ember.Component.extend({
 
   actions: {
     checkFocus(outletState) {
+      let getOwner = get(this, 'getOwner') || Ember.getOwner;
       let application = getOwner(this).lookup('application:main');
       let pivotHandler = application.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
 
       let outletName = this.get('outletName');
 
-      let currentRoute = get(outletState, `${outletName}.render.name`);
+      let pathPrefix = '';
+      let currentOutletRouteKeyPrefix = get(this, 'currentOutletRouteKeyPrefix');
+      if (currentOutletRouteKeyPrefix) {
+        pathPrefix = `${currentOutletRouteKeyPrefix}.`;
+      }
+
+      let currentRoute = get(outletState, `${pathPrefix}${outletName}.render.name`);
       if (!currentRoute) {
         return;
       }
@@ -83,9 +92,3 @@ let FocusingOutlet = Ember.Component.extend({
     }
   }
 });
-
-FocusingOutlet.reopenClass({
-  positionalParams: ['inputOutletName']
-});
-
-export default FocusingOutlet;

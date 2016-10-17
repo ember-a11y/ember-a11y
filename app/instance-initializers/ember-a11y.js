@@ -1,10 +1,12 @@
 // This initializer exists only to make sure that the following
 // imports happen before the app boots.
 import Ember from 'ember';
-import { registerKeywords } from 'ember-a11y/ember-internals';
 import pivotRouteIdentifier from 'ember-a11y/utils/pivot-route-identifier';
 
+//{{htmlbars}}
+import { registerKeywords } from 'ember-a11y/ember-internals';
 registerKeywords();
+//{{/htmlbars}}
 
 let stashedHandlerInfos = {};
 
