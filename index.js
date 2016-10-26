@@ -7,20 +7,6 @@ var replace = require('broccoli-string-replace');
 var mergeTrees = require('broccoli-merge-trees');
 var VersionChecker = require('ember-cli-version-checker');
 
-// Support old versions of Ember CLI.
-function findRoot(original) {
-  var current = original;
-  var app;
-
-  // Keep iterating upward until we don't have a grandparent.
-  // Has to do this grandparent check because at some point we hit the project.
-  do {
-    app = current.app || app;
-  } while (current.parent && current.parent.parent && (current = current.parent));
-
-  return app;
-}
-
 module.exports = {
   name: 'ember-a11y',
 
@@ -29,7 +15,7 @@ module.exports = {
       this._super.init.apply(this, arguments);
     }
 
-    // PART ONE: Identify if we're building for HTMLBars or Glimmer.
+    // Identify if we're building for HTMLBars or Glimmer.
     var versionChecker = new VersionChecker(this);
     versionChecker.for('ember-cli', 'npm').assertAbove('0.2.0');
 
@@ -55,32 +41,50 @@ module.exports = {
     } else {
       throw new Error('ember-a11y does not support your version of Ember.');
     }
+  },
 
-    // PART TWO: Sneakily blacklist ember-getowner-polyfill.
-    // `getOwner` is included by default in all Glimmer versions.
-    // Must happen in `init`.
-    var root = findRoot(this);
-
-    if (this.isGlimmer) {
-      var blacklist = root.options.addons.blacklist;
-
-      if (blacklist) {
-        blacklist.push('ember-getowner-polyfill');
-      } else {
-        blacklist = ['ember-getowner-polyfill'];
-      }
+  shouldIncludeChildAddon: function(addon) {
+    if (addon.name !== 'ember-getowner-polyfill') {
+      return this._super.shouldIncludeChildAddon.apply(this, arguments);
     }
 
+    // Only dealing with `ember-getowner-polyfill`
+    var versionChecker = new VersionChecker(this);
+
+    var emberSourceVersion = versionChecker.for('ember-source', 'npm').version;
+    var emberBowerChecker = versionChecker.for('ember', 'bower');
+
+    this.needsOwnerPolyfill = (!emberSourceVersion && emberBowerChecker.lt('2.3.0-beta'));
+    return this.needsOwnerPolyfill;
   },
 
   treeForAddon: function() {
-    var trees = [this._super.treeForAddon.apply(this, arguments)];
+    var tree = mergeTrees([this._super.treeForAddon.apply(this, arguments)], { overwrite: true });
+    var trees = [tree];
 
     // include `ember-internals` module ONLY for htmlbars
     if (this.isHTMLBars) {
       trees.push(new Funnel(this.versionSpecificPath, {
         files: ['ember-internals.js'],
         destDir: 'modules/' + this.name
+      }));
+    }
+
+    if (this.needsOwnerPolyfill) {
+      trees.push(replace(tree, {
+        files: ['modules/ember-a11y/mixins/focusing.js'],
+        pattern: {
+          match: /\/\/ import getOwner from 'ember-getowner-polyfill';/,
+          replacement: 'import getOwner from \'ember-getowner-polyfill\';'
+        }
+      }));
+    } else {
+      trees.push(replace(tree, {
+        files: ['modules/ember-a11y/mixins/focusing.js'],
+        pattern: {
+          match: /\/\/ const { getOwner } = Ember;/,
+          replacement: 'const { getOwner } = Ember;'
+        }
       }));
     }
 

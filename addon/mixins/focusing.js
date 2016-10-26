@@ -1,5 +1,10 @@
 import Ember from 'ember';
 
+/* globals getOwner */
+// One of these two will be uncommented at build time:
+// import getOwner from 'ember-getowner-polyfill';
+// const { getOwner } = Ember;
+
 const {
   get,
   Mixin
@@ -58,7 +63,6 @@ export default Mixin.create({
 
   actions: {
     checkFocus(outletState) {
-      let getOwner = get(this, 'getOwner') || Ember.getOwner;
       let application = getOwner(this).lookup('application:main');
       let pivotHandler = application.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
 
