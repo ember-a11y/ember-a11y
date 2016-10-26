@@ -8,15 +8,13 @@ var mergeTrees = require('broccoli-merge-trees');
 var VersionChecker = require('ember-cli-version-checker');
 
 // Support old versions of Ember CLI.
-function findHost() {
-  var current = this;
+function findRoot(original) {
+  var current = original;
   var app;
 
   // Keep iterating upward until we don't have a grandparent.
   // Has to do this grandparent check because at some point we hit the project.
-  // Stop at lazy engine boundaries.
   do {
-    if (current.lazyLoading === true) { return current; }
     app = current.app || app;
   } while (current.parent && current.parent.parent && (current = current.parent));
 
@@ -31,42 +29,40 @@ module.exports = {
       this._super.init.apply(this, arguments);
     }
 
+    // PART ONE: Identify if we're building for HTMLBars or Glimmer.
     var versionChecker = new VersionChecker(this);
     versionChecker.for('ember-cli', 'npm').assertAbove('0.2.0');
 
-    var emberNpmVersion = versionChecker.for('ember-source', 'npm');
+    var emberBowerChecker = versionChecker.for('ember', 'bower');
+    var emberSourceVersion = versionChecker.for('ember-source', 'npm').version;
 
-    // if `ember-source` is installed, assume Glimmer
-    if (emberNpmVersion.version) {
-      this.isGlimmer = true;
-      this.isHTMLBars = false;
-      this.versionSpecificPath = path.join(this.root, 'glimmer-version');
-    } else {
-      var emberVersion = versionChecker.for('ember', 'bower');
+    /**
+     * There are many weird interim versions of Glimmer in use.
+     *
+     * We check for versions known to be released with Glimmer:
+     * - 2.9.0-alpha.[1-4]
+     * - 2.9.0-beta.[1-5]
+     * - 2.10.0-alpha.1
+     * - All versions released as ember-source.
+     */
+    this.isGlimmer = emberSourceVersion || (emberBowerChecker.gt('2.9.0-alpha') && emberBowerChecker.lt('2.9.0')) || emberBowerChecker.gt('2.10.0-alpha');
+    this.isHTMLBars = !this.isGlimmer && emberBowerChecker.gt('1.10.0-beta');
 
-      var isGlimmer = (emberVersion.gt('2.9.0-beta') && emberVersion.lt('2.9.0')) || emberVersion.gt('2.10.0-alpha');
-      var isHTMLBars = emberVersion.gt('1.10.0-beta') && !isGlimmer;
-
-      if (isGlimmer) {
-        this.versionSpecificPath = path.join(this.root, 'glimmer-version');
-        this.isGlimmer = isGlimmer;
-
-      } else if (isHTMLBars) {
-        this.isHTMLBars = isHTMLBars;
-        this.versionSpecificPath = path.join(this.root, 'htmlbars-version');
-      } else {
-        throw new Error();
-      }
-    }
-  },
-
-  included: function(app) {
-    this.app = findHost.call(this);
-
-    // blacklist `ember-getowner-polyfill` since it is supported
-    // by default in Glimmer
     if (this.isGlimmer) {
-      var blacklist = this.app.options.addons.blacklist;
+      this.versionSpecificPath = path.join(this.root, 'glimmer-version');
+    } else if (this.isHTMLBars) {
+      this.versionSpecificPath = path.join(this.root, 'htmlbars-version');
+    } else {
+      throw new Error('ember-a11y does not support your version of Ember.');
+    }
+
+    // PART TWO: Sneakily blacklist ember-getowner-polyfill.
+    // `getOwner` is included by default in all Glimmer versions.
+    // Must happen in `init`.
+    var root = findRoot(this);
+
+    if (this.isGlimmer) {
+      var blacklist = root.options.addons.blacklist;
 
       if (blacklist) {
         blacklist.push('ember-getowner-polyfill');
@@ -74,6 +70,7 @@ module.exports = {
         blacklist = ['ember-getowner-polyfill'];
       }
     }
+
   },
 
   treeForAddon: function() {
@@ -103,12 +100,13 @@ module.exports = {
   treeForApp: function(defaultTree) {
     this._super.treeForApp.call(this, arguments);
 
+    var PATTERN = /{{htmlbars}}[\s\S]*?{{\/htmlbars}}/gim;
+
     if (this.isGlimmer) {
       // since `ember-internals` module is not needed for Glimmer
       // we want to remove calls to it from instance initializer.
       // string-replace hack, replace everything that is wrapped
       // into "{{htmlbars}}" with an empty string.
-      var PATTERN = /\/\/{{htmlbars}}[\s\S]*?\/\/{{\/htmlbars}}/gim;
       defaultTree = replace(defaultTree, {
         files: ['instance-initializers/ember-a11y.js'],
         pattern: {
