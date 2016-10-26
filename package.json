@@ -17,7 +17,7 @@
     "url": "git+https://github.com/ember-a11y/ember-a11y.git"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": "0.12.* || 4.* || 6.* || 7.*"
   },
   "author": "",
   "license": "MIT",
