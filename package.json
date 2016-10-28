@@ -17,7 +17,7 @@
     "url": "git+https://github.com/ember-a11y/ember-a11y.git"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": "0.12.* || 4.* || 6.* || 7.*"
   },
   "author": "",
   "license": "MIT",
@@ -45,16 +45,20 @@
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.1"
   },
+  "dependencies": {
+    "broccoli-funnel": "^1.0.7",
+    "broccoli-merge-trees": "^1.1.4",
+    "broccoli-string-replace": "^0.1.1",
+    "ember-cli-babel": "^5.1.6",
+    "ember-cli-version-checker": "^1.1.7",
+    "ember-getowner-polyfill": "^1.0.1"
+  },
   "keywords": [
     "ember-addon",
     "a11y",
     "accessibility",
     "ember"
   ],
-  "dependencies": {
-    "ember-cli-babel": "^5.1.6",
-    "ember-getowner-polyfill": "^1.0.1"
-  },
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "http://ember-a11y.github.io/ember-a11y"
