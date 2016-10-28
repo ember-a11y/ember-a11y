@@ -43,21 +43,6 @@ module.exports = {
     }
   },
 
-  shouldIncludeChildAddon: function(addon) {
-    if (addon.name !== 'ember-getowner-polyfill') {
-      return this._super.shouldIncludeChildAddon.apply(this, arguments);
-    }
-
-    // Only dealing with `ember-getowner-polyfill`
-    var versionChecker = new VersionChecker(this);
-
-    var emberSourceVersion = versionChecker.for('ember-source', 'npm').version;
-    var emberBowerChecker = versionChecker.for('ember', 'bower');
-
-    this.needsOwnerPolyfill = (!emberSourceVersion && emberBowerChecker.lt('2.3.0-beta'));
-    return this.needsOwnerPolyfill;
-  },
-
   treeForAddon: function() {
     var tree = mergeTrees([this._super.treeForAddon.apply(this, arguments)], { overwrite: true });
     var trees = [tree];
@@ -70,23 +55,10 @@ module.exports = {
       }));
     }
 
-    if (this.needsOwnerPolyfill) {
-      trees.push(replace(tree, {
-        files: ['modules/ember-a11y/mixins/focusing.js'],
-        pattern: {
-          match: /\/\/ import getOwner from 'ember-getowner-polyfill';/,
-          replacement: 'import getOwner from \'ember-getowner-polyfill\';'
-        }
-      }));
-    } else {
-      trees.push(replace(tree, {
-        files: ['modules/ember-a11y/mixins/focusing.js'],
-        pattern: {
-          match: /\/\/ const { getOwner } = Ember;/,
-          replacement: 'const { getOwner } = Ember;'
-        }
-      }));
-    }
+    trees.push(new Funnel(this.versionSpecificPath, {
+      files: ['ember-get-owner.js'],
+      destDir: 'modules/' + this.name
+    }));
 
     return mergeTrees(trees, { overwrite: true });
   },

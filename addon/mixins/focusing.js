@@ -1,9 +1,5 @@
 import Ember from 'ember';
-
-/* globals getOwner */
-// One of these two will be uncommented at build time:
-// import getOwner from 'ember-getowner-polyfill';
-// const { getOwner } = Ember;
+import getOwner from 'ember-a11y/ember-get-owner';
 
 const {
   get,
