@@ -43,6 +43,14 @@ module.exports = {
     }
   },
 
+  shouldIncludeChildAddon: function(addon) {
+    if (addon.name !== 'ember-getowner-polyfill') {
+      return this._super.shouldIncludeChildAddon.apply(this, arguments);
+    }
+
+    return this.isHTMLBars;
+  },
+
   treeForAddon: function() {
     var tree = mergeTrees([this._super.treeForAddon.apply(this, arguments)], { overwrite: true });
     var trees = [tree];
