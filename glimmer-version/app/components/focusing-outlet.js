@@ -2,7 +2,6 @@ import Ember from 'ember';
 import FocusingOutletMixin from 'ember-a11y/mixins/focusing';
 
 const {
-  get,
   Component
 } = Ember;
 
