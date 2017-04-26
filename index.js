@@ -51,34 +51,35 @@ module.exports = {
     return this.isHTMLBars;
   },
 
-  treeForAddon: function() {
-    var tree = mergeTrees([this._super.treeForAddon.apply(this, arguments)], { overwrite: true });
-    var trees = [tree];
+  treeForAddon: function(_tree) {
+    var trees = [_tree];
 
     // include `ember-internals` module ONLY for htmlbars
     if (this.isHTMLBars) {
       trees.push(new Funnel(this.versionSpecificPath, {
-        files: ['ember-internals.js'],
-        destDir: 'modules/' + this.name
+        files: ['ember-internals.js']
       }));
     }
 
     trees.push(new Funnel(this.versionSpecificPath, {
-      files: ['ember-get-owner.js'],
-      destDir: 'modules/' + this.name
+      files: ['ember-get-owner.js']
     }));
 
-    return mergeTrees(trees, { overwrite: true });
+    var mergedTrees = mergeTrees(trees, { overwrite: true });
+
+    return this._super.treeForAddon.call(this, mergedTrees);
   },
 
-  treeForTemplates: function() {
-    var trees = [this._super.treeForTemplates.apply(this, arguments)];
+  treeForTemplates: function(_tree) {
+    var trees = [_tree];
 
     trees.push(this.treeGenerator(
       path.resolve(this.root, this.versionSpecificPath, 'app', 'templates')
     ));
 
-    return mergeTrees(trees.filter(Boolean), { overwrite: true });
+    var mergedTrees = mergeTrees(trees.filter(Boolean), { overwrite: true });
+
+    return this._super.treeForTemplates.call(this, mergedTrees);
   },
 
   treeForApp: function(defaultTree) {
