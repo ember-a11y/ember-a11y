@@ -50,7 +50,12 @@ export default Mixin.create({
       window.addEventListener('scroll', handler);
 
       // Set the focus to the target outlet wrapper.
-      Ember.run.schedule('afterRender', this, function() { this.element.focus(); });
+      Ember.run.schedule('afterRender', this, function() {
+        this.element.blur();
+        Ember.run.next(this, function() {
+          this.element.focus();
+        });
+      });
     } else {
       this.element.removeAttribute('tabindex');
       this.element.removeAttribute('role');
@@ -85,7 +90,7 @@ export default Mixin.create({
       this.set('shouldFocus', shouldFocus);
 
       if (pivotHandler) {
-        application.set('_stashedHandlerInfos.pivotHandler.handled', handled || shouldFocus);
+        application.set('_stashedHandlerInfos.pivotHandler.handled', handled || (shouldFocus && !isChildState));
       }
 
       this.setFocus();
