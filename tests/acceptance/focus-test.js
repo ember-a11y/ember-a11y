@@ -98,7 +98,42 @@ test('Linking to descendant routes with local error states.', function(assert) {
   andThen(() => { assert.equal(checkFocus(), 'Global Error'); });
 });
 
-test('Should load leaf routes with a spurious focusing outlet without any errors.', function(assert) {
+test('Linking to a slow loading route', function(assert) {
+  visit('/');
+
+  let focusingOutlet;
+  let focusCount = 0;
+  let blurCount = 0;
+
+  andThen(() => {
+    focusingOutlet = document.querySelector('.focusing-outlet');
+
+    focusingOutlet.focusStub = focusingOutlet.focus;
+    focusingOutlet.focus = () => {
+      focusCount++;
+      focusingOutlet.focusStub();
+    };
+
+    focusingOutlet.blurStub = focusingOutlet.blur;
+    focusingOutlet.blur = () => {
+      blurCount++;
+      focusingOutlet.blurStub();
+    };
+  });
+
+  visit('/slow');
+
+  andThen(() => {
+    assert.equal(focusCount, 2);
+    assert.equal(blurCount, 2);
+    assert.equal(checkFocus(), 'Slow Route');
+
+    focusingOutlet.focus = focusingOutlet.focusStub;
+    focusingOutlet.blur = focusingOutlet.blurStub;
+  });
+});
+
+test('Should load leaf routes with a spurious focusing focusingOutlet without any errors.', function(assert) {
   visit('/');
   visit('/about');
   andThen(() => { assert.equal(checkFocus(), 'About Us'); });
