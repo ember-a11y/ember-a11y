@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import getOwner from 'ember-a11y/ember-get-owner';
 
 const {
   get,
-  Mixin
+  Mixin,
+  getOwner
 } = Ember;
 
 let scrollLeft = 0;
