@@ -2,9 +2,21 @@
   "name": "ember-a11y",
   "version": "0.1.14",
   "description": "A collection of tools to build accessible Ember applications.",
+  "keywords": [
+    "ember-addon",
+    "a11y",
+    "accessibility",
+    "ember"
+  ],
+  "license": "MIT",
+  "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ember-a11y/ember-a11y.git"
   },
   "scripts": {
     "build": "ember build",
@@ -12,22 +24,13 @@
     "test": "ember try:each",
     "demo": "git stash && ember github-pages:commit --message \"Update demo application.\" && git push origin gh-pages:gh-pages && git stash pop"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ember-a11y/ember-a11y.git"
-  },
-  "engines": {
-    "node": "0.12.* || 4.* || 6.* || 7.*"
-  },
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "ember-cli-eslint": "1.4.1",
     "ember-cli-github-pages": "0.0.8",
     "ember-cli-sass": "^5.3.0",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^2.4.1",
-    "ember-cli": "2.9.1",
+    "ember-cli": "2.10.0",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-dependency-checker": "^1.3.0",
     "ember-cli-htmlbars": "^1.0.10",
@@ -43,7 +46,7 @@
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
-    "loader.js": "~4.0.10"
+    "loader.js": "^4.0.10"
   },
   "dependencies": {
     "broccoli-funnel": "^1.0.7",
@@ -53,12 +56,9 @@
     "ember-cli-version-checker": "^1.1.7",
     "ember-getowner-polyfill": "^1.0.1"
   },
-  "keywords": [
-    "ember-addon",
-    "a11y",
-    "accessibility",
-    "ember"
-  ],
+  "engines": {
+    "node": "0.12.* || 4.* || 6.* || 7.*"
+  },
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "http://ember-a11y.github.io/ember-a11y"
