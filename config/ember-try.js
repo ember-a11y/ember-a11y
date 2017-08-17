@@ -1,12 +1,6 @@
-/*jshint node:true*/
+/* eslint-env node */
 module.exports = {
   scenarios: [
-    {
-      name: 'default',
-      bower: {
-        dependencies: { }
-      }
-    },
     {
       name: 'ember-lts-2.4',
       bower: {
@@ -85,6 +79,12 @@ module.exports = {
         devDependencies: {
           'ember-source': null
         }
+      }
+    },
+    {
+      name: 'ember-default',
+      npm: {
+        devDependencies: {}
       }
     }
   ]
