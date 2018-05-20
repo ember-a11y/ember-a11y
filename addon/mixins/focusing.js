@@ -1,10 +1,7 @@
-import Ember from 'ember';
-
-const {
-  get,
-  Mixin,
-  getOwner
-} = Ember;
+import { schedule, next } from '@ember/runloop';
+import { get } from '@ember/object';
+import Mixin from '@ember/object/mixin';
+import { getOwner } from '@ember/application';
 
 let scrollLeft = 0;
 let scrollTop = 0;
@@ -50,9 +47,9 @@ export default Mixin.create({
       window.addEventListener('scroll', handler);
 
       // Set the focus to the target outlet wrapper.
-      Ember.run.schedule('afterRender', this, function() {
+      schedule('afterRender', this, function() {
         this.element.blur();
-        Ember.run.next(this, function() {
+        next(this, function() {
           this.element.focus();
         });
       });

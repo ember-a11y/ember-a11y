@@ -1,6 +1,6 @@
 // This initializer exists only to make sure that the following
 // imports happen before the app boots.
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import pivotRouteIdentifier from 'ember-a11y/utils/pivot-route-identifier';
 
 //{{htmlbars}}
@@ -10,7 +10,7 @@ registerKeywords();
 
 let stashedHandlerInfos = {};
 
-Ember.Router.reopen({
+EmberRouter.reopen({
   willTransition(oldHandlerInfos, newHandlerInfos /* transition */) {
     let pivotHandler = pivotRouteIdentifier(oldHandlerInfos, newHandlerInfos);
     stashedHandlerInfos.pivotHandler = pivotHandler;
