@@ -1,9 +1,5 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import FocusingOutletMixin from 'ember-a11y/mixins/focusing';
-
-const {
-  Component
-} = Ember;
 
 let FocusingOutlet = Component.extend(FocusingOutletMixin, {
   currentOutletRouteKeyPrefix: 'outlets'

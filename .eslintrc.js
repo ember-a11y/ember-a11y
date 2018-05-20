@@ -15,6 +15,7 @@ module.exports = {
     browser: true
   },
   rules: {
+    'ember/no-attrs-in-components': 0
   },
   overrides: [
     // node files
