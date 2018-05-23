@@ -6,7 +6,7 @@
 
 This Ember addon provides a `{{focusing-outlet}}` component which you can use in place of normal `{{outlet}}`s.
 
-The current implementation of this addon will immediately apply focus to the most relevant piece of content based on actions users take (clicking buttons, links, etc). This allows screen readers to catch changes and read the right information, thus providing a much better experience for blind users.
+The current implementation of this addon will immediately apply focus to the most relevant piece of content based on actions users take (clicking buttons, links, etc). This allows screen readers to catch changes and read the right information, thus providing a much better experience for screen reader users.
 
 ## Usage
 
