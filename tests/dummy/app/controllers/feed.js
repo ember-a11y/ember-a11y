@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: ['filter', 'sort', 'direction'],
   filter: null,
   sort: null,
   direction: null,
 
-  feedItems: Ember.computed('sort', 'direction', 'model', function() {
+  feedItems: computed('sort', 'direction', 'model', function() {
     let field = this.get('sort');
     let direction = this.get('direction');
     let model = this.get('model');

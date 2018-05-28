@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { A } from '@ember/array';
+import EmberObject, { computed } from '@ember/object';
 
 // Feed items have a backing class!
-const FeedItem = Ember.Object.extend({
+const FeedItem = EmberObject.extend({
   title: null,
   type: null,
   createdAt: null,
-  displayDate: Ember.computed('createdAt', function () {
+  displayDate: computed('createdAt', function () {
     return `${this.get('createdAt').toDateString()}`;
   })
 });
@@ -14,7 +16,7 @@ const FeedItem = Ember.Object.extend({
 function createFeed(filter) {
   const now = Date.now();
 
-  let base = Ember.A([
+  let base = A([
     FeedItem.create({ title: 'Nathan liked your post "Why A11y is Awesome".', type: 'Likes', createdAt: new Date(now - 10e7 * 10) }),
     FeedItem.create({ title: 'Tomster sent you a private message.', type: 'Messages', createdAt: new Date(now - 10e7 * 8) }),
     FeedItem.create({ title: 'Tomster liked your post "Why A11y is Awesome".', type: 'Likes', createdAt: new Date(now - 10e7 * 6) }),
@@ -32,7 +34,7 @@ function createFeed(filter) {
   return base;
 }
 
-export default Ember.Route.extend({
+export default Route.extend({
   queryParams: {
     filter: { refreshModel: true },
     sort: { refreshModel: false },

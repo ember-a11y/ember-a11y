@@ -1,4 +1,4 @@
-import Ember from "ember";
+import Component from '@ember/component';
 import layout from "../templates/components/github-issue";
 
 export var base = `
@@ -15,7 +15,7 @@ export var base = `
 [//]: # (Describe what actually happened. Please include the step number that failed!)
 `;
 
-export default Ember.Component.extend({
+export default Component.extend({
   init: function() {
     this._super(...arguments);
     var title = this.get('title');

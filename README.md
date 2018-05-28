@@ -16,17 +16,13 @@ In your templates you would then swap in `{{focusing-outlet}}` for `{{outlet}}` 
 
 [You also need to ensure that your application's router is not set to use `locationType: 'hash'`.](https://github.com/ember-a11y/ember-a11y/issues/2) Set `ENV.locationType` appropriately inside of `config/environment.js`.
 
-#### Note about `ember-getowner-polyfill`
+## Ember version compatibility
 
-If you are using Ember `2.3.0-beta+` you should add `ember-getowner-polyfill` to your blacklist in `ember-cli-build.js`:
 
-```javascript
-var app = new EmberAddon(defaults, {
-  addons: {
-    blacklist: ['ember-getowner-polyfill']
-  }
-});
-```
+| ember version | ember-a11y version | 
+|-----|-----|
+| <= 2.8 | 0.1.15 |
+| > 2.8  | latest  |
 
 ## Demo Application
 
