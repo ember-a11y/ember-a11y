@@ -53,6 +53,7 @@ export default Mixin.create({
       Ember.run.schedule('afterRender', this, function() {
         this.element.blur();
         Ember.run.next(this, function() {
+          if (!this.element) { return; }
           this.element.focus();
         });
       });
