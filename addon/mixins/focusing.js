@@ -51,8 +51,12 @@ export default Mixin.create({
 
       // Set the focus to the target outlet wrapper.
       Ember.run.schedule('afterRender', this, function() {
+        if (!this.element) { return; }
+
         this.element.blur();
         Ember.run.next(this, function() {
+          if (!this.element) { return; }
+
           this.element.focus();
         });
       });
