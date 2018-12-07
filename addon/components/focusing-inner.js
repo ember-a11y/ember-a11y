@@ -1,64 +1,22 @@
 import Ember from 'ember';
 
-let scrollLeft = 0;
-let scrollTop = 0;
-let handler = function() {
-  window.scrollTo(scrollLeft, scrollTop);
-  window.removeEventListener('scroll', handler);
-};
-
 let FocusingInner = Ember.Component.extend({
   tagName: 'div',
   classNames: ['focusing-outlet'],
 
+  outletName: null,
   shouldFocus: false,
 
   didInsertElement() {
     this._super(...arguments);
-    this.setFocus();
-  },
-
-  setFocus() {
-    if (!this.element) { return; }
-
-    let shouldFocus = this.get('shouldFocus');
-
-    if (shouldFocus) {
-      // One shouldn't set an attribute when they mean to set a property.
-      // Except when a property is only settable if the attribute is present.
-      // We have to make the element interactive prior to focusing it.
-      this.element.setAttribute('tabindex', '-1');
-      this.element.setAttribute('role', 'group');
-
-      // If we don't do this, the scroll triggered by the focus will be unfortunate.
-      // This effectively swallows one scroll event.
-      // TODO: Investigate setting focus to something inside of overflow: auto;
-      scrollLeft = document.body.scrollLeft;
-      scrollTop = document.body.scrollTop;
-      window.addEventListener('scroll', handler);
-
-      // Set the focus to the target outlet wrapper.
-      Ember.run.schedule('afterRender', this, function() {
-        if (!this.element) { return; }
-
-        this.element.blur();
-        Ember.run.next(this, function() {
-          if (!this.element) { return; }
-
-          this.element.focus();
-        });
-      });
-    } else {
-      this.element.removeAttribute('tabindex');
-      this.element.removeAttribute('role');
-    }
+    this.scheduleFocus();
   },
 
   // This fires every time outletState changes.
   // That is our cue that we want to set focus.
   watcher: Ember.observer('outletState', function() {
-    const outletName = this.get('outletName');
-    const outletState = this.get('outletState');
+    let outletName = this.get('outletName');
+    let outletState = this.get('outletState');
 
     let application = Ember.getOwner(this).lookup('application:main');
     let pivotHandler = application.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
@@ -81,8 +39,61 @@ let FocusingInner = Ember.Component.extend({
       application.set('_stashedHandlerInfos.pivotHandler.handled', handled || (shouldFocus && !isChildState));
     }
 
-    this.setFocus();
-  })
+    this.scheduleFocus();
+  }),
+
+  scheduleFocus() {
+    if (!this.element) { return; }
+
+    if (
+      this.get('shouldFocus') &&
+      !this.isDestroyed &&
+      !this.isDestroying
+    ) {
+      // We need to wait until the content is rendered into the outlet before setting focus.
+      Ember.run.scheduleOnce('afterRender', this, 'setFocus');
+    } else {
+      this.element.removeAttribute('tabindex');
+      this.element.removeAttribute('role');
+    }
+  },
+
+  setFocus() {
+    if (!this.element) { return; }
+
+    if (
+      this.get('shouldFocus') &&
+      !this.isDestroyed &&
+      !this.isDestroying
+    ) {
+      // Just in case it is currently focused.
+      this.element.blur();
+
+      // We have to make the element interactive prior to focusing it.
+      this.element.setAttribute('tabindex', '-1');
+      this.element.setAttribute('role', 'group');
+      this.scrollPositionFocus();
+    }
+  },
+
+  scrollPositionFocus() {
+    let parents = [];
+
+    for (let current = this.element; current; current = current.parentNode) {
+      parents.push({ element: current, scrollTop: current.scrollTop, scrollLeft: current.scrollLeft });
+    }
+
+    this.element.focus();
+
+    // Reset the scroll position for the entire hierarchy.
+    for (let i = 0; i < parents.length; i++) {
+      let scrollConfig = parents[i];
+      let element = scrollConfig.element;
+
+      element.scrollTop = scrollConfig.scrollTop;
+      element.scrollLeft = scrollConfig.scrollLeft;
+    }
+  }
 });
 
 export default FocusingInner;
