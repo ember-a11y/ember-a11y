@@ -1,11 +1,5 @@
 import Ember from 'ember';
 
-const {
-  get,
-  Mixin,
-  getOwner
-} = Ember;
-
 let scrollLeft = 0;
 let scrollTop = 0;
 let handler = function() {
@@ -13,17 +7,11 @@ let handler = function() {
   window.removeEventListener('scroll', handler);
 };
 
-export default Mixin.create({
+let FocusingInner = Ember.Component.extend({
   tagName: 'div',
   classNames: ['focusing-outlet'],
 
   shouldFocus: false,
-  currentOutletRouteKeyPrefix: null,
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    this.set('outletName', this.attrs.inputOutletName || 'main');
-  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -66,38 +54,35 @@ export default Mixin.create({
     }
   },
 
-  actions: {
-    checkFocus(outletState) {
-      let application = getOwner(this).lookup('application:main');
-      let pivotHandler = application.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
+  // This fires every time outletState changes.
+  // That is our cue that we want to set focus.
+  watcher: Ember.observer('outletState', function() {
+    const outletName = this.get('outletName');
+    const outletState = this.get('outletState');
 
-      let outletName = this.get('outletName');
+    let application = Ember.getOwner(this).lookup('application:main');
+    let pivotHandler = application.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
 
-      let pathPrefix = '';
-      let currentOutletRouteKeyPrefix = get(this, 'currentOutletRouteKeyPrefix');
-      if (currentOutletRouteKeyPrefix) {
-        pathPrefix = `${currentOutletRouteKeyPrefix}.`;
-      }
-
-      let currentRoute = get(outletState, `${pathPrefix}${outletName}.render.name`);
-      if (!currentRoute) {
-        return;
-      }
-
-      let handled = application.get('_stashedHandlerInfos.pivotHandler.handled');
-      let isFirstVisit = pivotHandler === undefined;
-      let isPivot = (pivotHandler === currentRoute);
-      let isChildState = ~['loading', 'error'].indexOf(currentRoute.split('.').pop());
-      let isSubstate = ~currentRoute.indexOf('_loading') || ~currentRoute.indexOf('_error');
-
-      let shouldFocus = !handled && !isFirstVisit && (isPivot || isChildState || isSubstate);
-      this.set('shouldFocus', shouldFocus);
-
-      if (pivotHandler) {
-        application.set('_stashedHandlerInfos.pivotHandler.handled', handled || (shouldFocus && !isChildState));
-      }
-
-      this.setFocus();
+    let currentRoute = Ember.get(outletState, `outlets.${outletName}.render.name`);
+    if (!currentRoute) {
+      return;
     }
-  }
+
+    let handled = application.get('_stashedHandlerInfos.pivotHandler.handled');
+    let isFirstVisit = pivotHandler === undefined;
+    let isPivot = (pivotHandler === currentRoute);
+    let isChildState = ~['loading', 'error'].indexOf(currentRoute.split('.').pop());
+    let isSubstate = ~currentRoute.indexOf('_loading') || ~currentRoute.indexOf('_error');
+
+    let shouldFocus = !handled && !isFirstVisit && (isPivot || isChildState || isSubstate);
+    this.set('shouldFocus', shouldFocus);
+
+    if (pivotHandler) {
+      application.set('_stashedHandlerInfos.pivotHandler.handled', handled || (shouldFocus && !isChildState));
+    }
+
+    this.setFocus();
+  })
 });
+
+export default FocusingInner;
