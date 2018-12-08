@@ -9,19 +9,26 @@ let FocusingInner = Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.scheduleFocus();
+    this.processChange();
   },
 
   // This fires every time outletState changes.
   // That is our cue that we want to set focus.
   watcher: Ember.observer('outletState', function() {
+    this.processChange();
+  }),
+
+  processChange() {
     let outletName = this.get('outletName');
     let outletState = this.get('outletState');
 
     let application = Ember.getOwner(this).lookup('application:main');
     let pivotHandler = application.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
 
-    let currentRoute = Ember.get(outletState, `outlets.${outletName}.render.name`);
+    // Supports Handlebars version which stores information up one level.
+    let outletObject = outletState.outlets || outletState;
+
+    let currentRoute = Ember.get(outletObject, `${outletName}.render.name`);
     if (!currentRoute) {
       return;
     }
@@ -40,7 +47,7 @@ let FocusingInner = Ember.Component.extend({
     }
 
     this.scheduleFocus();
-  }),
+  },
 
   scheduleFocus() {
     if (!this.element) { return; }
