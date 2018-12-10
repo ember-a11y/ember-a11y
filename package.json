@@ -26,12 +26,12 @@
     "demo": "git stash && ember github-pages:commit --message \"Update demo application.\" && git push origin gh-pages:gh-pages && git stash pop"
   },
   "dependencies": {
-    "broccoli-funnel": "^2.0.1",
+    "broccoli-file-creator": "^2.1.1",
     "broccoli-merge-trees": "^3.0.1",
-    "broccoli-string-replace": "^0.1.2",
+    "broccoli-stew": "^2.0.1",
     "ember-cli-babel": "^6.6.0",
-    "ember-cli-version-checker": "^2.1.2",
-    "ember-getowner-polyfill": "^2.2.0"
+    "ember-cli-htmlbars": "^2.0.1",
+    "ember-cli-version-checker": "^2.1.2"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
@@ -40,7 +40,6 @@
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.2.1",
     "ember-cli-github-pages": "^0.2.0",
-    "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-qunit": "^4.1.1",
