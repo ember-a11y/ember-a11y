@@ -1,6 +1,6 @@
 {
   "name": "ember-a11y",
-  "version": "0.1.17",
+  "version": "0.2.0",
   "description": "A collection of tools to build accessible Ember applications.",
   "keywords": [
     "ember-addon",
