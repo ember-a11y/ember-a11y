@@ -50,7 +50,21 @@ let FocusingInner = Ember.Component.extend({
   },
 
   scheduleFocus() {
-    if (!this.element) { return; }
+    const owner = Ember.getOwner(this);
+    const environment = owner.lookup('-environment:main');
+
+    // Assume that we're interactive by default to support old Ember.
+    let isInteractive = true;
+
+    // However, if we're in a version of Ember that explicitly sets
+    // `isInteractive` we will instead defer to that.
+    if (environment && Object.prototype.hasOwnProperty.call(environment, 'isInteractive')) {
+      isInteractive = environment.isInteractive;
+    }
+
+    if (!isInteractive || !this.element) {
+      return;
+    }
 
     if (
       this.get('shouldFocus') &&
