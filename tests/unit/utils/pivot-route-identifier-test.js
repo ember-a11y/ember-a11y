@@ -24,7 +24,7 @@ test('navigating to another subroute', function(assert) {
   ];
 
   let infoHandler = pivotRouteIdentifier(oldHandlers, newHandlers);
-  assert.equal(infoHandler.handler.routeName, 'photos.caption.edit');
+  assert.equal(infoHandler.routeName, 'photos.caption.edit');
 });
 
 test('can deal with the same handlers', function(assert) {
@@ -34,7 +34,7 @@ test('can deal with the same handlers', function(assert) {
   ];
 
   let infoHandler = pivotRouteIdentifier(oldHandlers, oldHandlers);
-  assert.equal(infoHandler.handler.routeName, 'photos.caption');
+  assert.equal(infoHandler.routeName, 'photos.caption');
 });
 
 test('deals with undefined oldHandlers', function(assert) {
@@ -45,7 +45,7 @@ test('deals with undefined oldHandlers', function(assert) {
   ];
 
   let infoHandler = pivotRouteIdentifier(undefined, newHandlers);
-  assert.equal(infoHandler.handler.routeName, 'photos');
+  assert.equal(infoHandler.routeName, 'photos');
 });
 
 test('can deal with no handlers', function(assert) {
@@ -64,7 +64,7 @@ test('navigating to a subroute', function(assert) {
   ];
 
   let infoHandler = pivotRouteIdentifier(oldHandlers, newHandlers);
-  assert.equal(infoHandler.handler.routeName, 'photos.caption');
+  assert.equal(infoHandler.routeName, 'photos.caption');
 });
 
 test('navigating to a parent route', function(assert) {
@@ -78,7 +78,7 @@ test('navigating to a parent route', function(assert) {
   ];
 
   let infoHandler = pivotRouteIdentifier(oldHandlers, newHandlers);
-  assert.equal(infoHandler.handler.routeName, 'photos');
+  assert.equal(infoHandler.routeName, 'photos');
 });
 
 test('navigating two steps back and one step forward', function(assert) {
@@ -93,7 +93,7 @@ test('navigating two steps back and one step forward', function(assert) {
   ];
 
   let infoHandler = pivotRouteIdentifier(oldHandlers, newHandlers);
-  assert.equal(infoHandler.handler.routeName, 'photos.surprise');
+  assert.equal(infoHandler.routeName, 'photos.surprise');
 });
 
 test('index to other route', function(assert) {
@@ -107,5 +107,5 @@ test('index to other route', function(assert) {
   ];
 
   let infoHandler = pivotRouteIdentifier(oldHandlers, newHandlers);
-  assert.equal(infoHandler.handler.routeName, 'photos');
+  assert.equal(infoHandler.routeName, 'photos');
 });
