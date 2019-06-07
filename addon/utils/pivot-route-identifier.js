@@ -1,6 +1,28 @@
+import { isArray } from '@ember/array';
+
+function findHandler(handlerContainers, index) {
+  if (!isArray(handlerContainers)) {
+    return undefined;
+  }
+
+  let foundHandlerContainer = handlerContainers[index];
+
+  if (!foundHandlerContainer) {
+    return undefined;
+  }
+
+  let foundHandler = foundHandlerContainer.handler || foundHandlerContainer.route;
+
+  if (!foundHandler) {
+    return undefined;
+  }
+
+  return foundHandler;
+}
+
 export default function pivotRouteIdentifier(oldHandlers, newHandlers) {
   if (oldHandlers === undefined) {
-    return newHandlers[0];
+    return findHandler(newHandlers, 0);
   }
 
   let length = Math.min(oldHandlers.length, newHandlers.length);
@@ -18,5 +40,6 @@ export default function pivotRouteIdentifier(oldHandlers, newHandlers) {
       return newHandler;
     }
   }
-  return newHandlers[length - offset];
+
+  return findHandler(newHandlers, length - offset);
 }
