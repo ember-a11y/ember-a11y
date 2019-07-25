@@ -1,18 +1,24 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { find, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { base } from '../../../components/github-issue';
-
-moduleForComponent('github-issue', 'Integration | Component | github-issue', {
-  integration: true
-});
 
 var baseURIComponent = encodeURIComponent(base);
 var linebreak = encodeURIComponent("\r\n");
 
-test('It renders.', function(assert) {
-  this.render(hbs`{{github-issue title="Reading Behavior"}}`);
-  assert.equal(this.$('a')[0].href, `https://github.com/ember-a11y/ember-a11y/issues/new?title=Demo%20App%20Issue%3A%20Reading%20Behavior&body=${baseURIComponent}${linebreak}`);
+module('Integration | Component | github-issue', function(hooks) {
+  setupRenderingTest(hooks);
 
-  this.render(hbs`{{github-issue title="Reading Behavior" body="[//]: # (Additional comment.)"}}`);
-  assert.equal(this.$('a')[0].href, `https://github.com/ember-a11y/ember-a11y/issues/new?title=Demo%20App%20Issue%3A%20Reading%20Behavior&body=${baseURIComponent}${encodeURIComponent("[//]: # (Additional comment.)")}${linebreak}${linebreak}`);
+  test('It renders with title', async function(assert) {
+    await render(hbs`{{github-issue title="Reading Behavior"}}`);
+    let href = find('a').getAttribute('href');
+    assert.equal(href, `https://github.com/ember-a11y/ember-a11y/issues/new?title=Demo%20App%20Issue%3A%20Reading%20Behavior&body=${baseURIComponent}${linebreak}`);
+  });
+
+  test('It renders with title and body', async function(assert) {
+    await render(hbs`{{github-issue title="Reading Behavior" body="[//]: # (Additional comment.)"}}`);
+    let href = find('a').getAttribute('href');
+    assert.equal(href, `https://github.com/ember-a11y/ember-a11y/issues/new?title=Demo%20App%20Issue%3A%20Reading%20Behavior&body=${baseURIComponent}${encodeURIComponent("[//]: # (Additional comment.)")}${linebreak}${linebreak}`);
+  });
 });
