@@ -14,7 +14,14 @@ export default function pivotRouteIdentifier(oldHandlers, newHandlers) {
     let oldHandler = oldHandlers[i];
     let newHandler = newHandlers[i];
 
-    if (oldHandler.handler.routeName !== newHandler.handler.routeName) {
+    let oldRouteName =
+      (oldHandler.handler && oldHandler.handler.routeName) ||
+      oldHandler._route.routeName;
+    let newRouteName =
+      (newHandler.handler && newHandler.handler.routeName) ||
+      newHandler._route.routeName;
+
+    if (oldRouteName !== newRouteName) {
       return newHandler;
     }
   }
