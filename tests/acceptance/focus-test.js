@@ -33,13 +33,23 @@ module('Acceptance | Focus Handling', function(hooks) {
     await visit('/feed');
     assert.equal(checkFocus(), 'Feed');
 
-    await visit('/boom');
+    try {
+      await visit('/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
     assert.equal(checkFocus(), 'Global Error');
 
     await visit('/profile');
     assert.equal(checkFocus(), 'John Doe');
 
-    await visit('/boomsubstate');
+    try {
+      await visit('/boomsubstate');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
     assert.equal(checkFocus(), 'Boom Substate Error');
   });
 
@@ -49,13 +59,23 @@ module('Acceptance | Focus Handling', function(hooks) {
     await visit('/feed');
     assert.equal(checkFocus(), 'Feed');
 
-    await visit('/parent/boom');
+    try {
+      await visit('/parent/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
     assert.equal(checkFocus(), 'Parent');
 
     await visit('/profile');
     assert.equal(checkFocus(), 'John Doe');
 
-    await visit('/parent/boomsubstate');
+    try {
+      await visit('/parent/boomsubstate');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
     assert.equal(checkFocus(), 'Parent');
   });
 
@@ -68,7 +88,12 @@ module('Acceptance | Focus Handling', function(hooks) {
     await visit('/parent');
     assert.equal(checkFocus(), 'Parent');
 
-    await visit('/parent/boom');
+    try {
+      await visit('/parent/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
     assert.equal(checkFocus(), 'Parent Error');
 
     await visit('/profile');
@@ -77,7 +102,12 @@ module('Acceptance | Focus Handling', function(hooks) {
     await visit('/parent');
     assert.equal(checkFocus(), 'Parent');
 
-    await visit('/parent/boomsubstate');
+    try {
+      await visit('/parent/boomsubstate');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
     assert.equal(checkFocus(), 'Boom Substate Error');
   });
 
@@ -87,7 +117,12 @@ module('Acceptance | Focus Handling', function(hooks) {
     await visit('/feed');
     assert.equal(checkFocus(), 'Feed');
 
-    await visit('/iso-parent/boom');
+    try {
+      await visit('/iso-parent/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
     assert.equal(checkFocus(), 'Global Error');
 
     await visit('/profile');
@@ -96,7 +131,12 @@ module('Acceptance | Focus Handling', function(hooks) {
     await visit('/iso-parent');
     assert.equal(checkFocus(), 'Isolated Parent');
 
-    await visit('/iso-parent/boom');
+    try {
+      await visit('/iso-parent/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
     assert.equal(checkFocus(), 'Global Error');
   });
 
