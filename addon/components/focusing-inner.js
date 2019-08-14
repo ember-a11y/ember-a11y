@@ -23,7 +23,9 @@ let FocusingInner = Ember.Component.extend({
     let outletState = this.get('outletState');
 
     let application = Ember.getOwner(this).lookup('application:main');
-    let pivotHandler = application.get('_stashedHandlerInfos.pivotHandler.handler.routeName');
+    let pivotHandler =
+      application.get('_stashedHandlerInfos.pivotHandler.handler.routeName') ||
+      application.get('_stashedHandlerInfos.pivotHandler.name');
 
     // Supports Handlebars version which stores information up one level.
     let outletObject = outletState.outlets || outletState;
