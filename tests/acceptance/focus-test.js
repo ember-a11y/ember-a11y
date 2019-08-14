@@ -1,5 +1,6 @@
-import { test } from 'qunit';
-import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { visit } from '@ember/test-helpers';
 
 function checkFocus() {
   let element = document.activeElement;
@@ -7,105 +8,145 @@ function checkFocus() {
   return valueElem.textContent;
 }
 
-moduleForAcceptance('Acceptance | Focus Handling');
+module('Acceptance | Focus Handling', function(hooks) {
+  setupApplicationTest(hooks);
 
-test('Checking focus while navigating', function(assert) {
-  visit('/');
+  test('Checking focus while navigating', async function(assert) {
+    await visit('/');
 
-  visit('/messages');
-  andThen(() => { assert.equal(checkFocus(), 'Messages'); });
+    await visit('/messages');
+    assert.equal(checkFocus(), 'Messages');
 
-  visit('/feed');
-  andThen(() => { assert.equal(checkFocus(), 'Feed'); });
+    await visit('/feed');
+    assert.equal(checkFocus(), 'Feed');
 
-  visit('/messages/Jimmy');
-  andThen(() => { assert.equal(checkFocus(), 'Messages'); });
+    await visit('/messages/Jimmy');
+    assert.equal(checkFocus(), 'Messages');
 
-  visit('/messages');
-  andThen(() => { assert.equal(checkFocus(), 'Conversations'); });
-});
+    await visit('/messages');
+    assert.equal(checkFocus(), 'Conversations');
+  });
 
-test('Linking to peers with local error states', function(assert) {
-  visit('/');
+  test('Linking to peers with local error states', async function(assert) {
+    await visit('/');
 
-  visit('/feed');
-  andThen(() => { assert.equal(checkFocus(), 'Feed'); });
+    await visit('/feed');
+    assert.equal(checkFocus(), 'Feed');
 
-  visit('/boom');
-  andThen(() => { assert.equal(checkFocus(), 'Global Error'); });
+    try {
+      await visit('/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
+    assert.equal(checkFocus(), 'Global Error');
 
-  visit('/profile');
-  andThen(() => { assert.equal(checkFocus(), 'John Doe'); });
+    await visit('/profile');
+    assert.equal(checkFocus(), 'John Doe');
 
-  visit('/boomsubstate');
-  andThen(() => { assert.equal(checkFocus(), 'Boom Substate Error'); });
-});
+    try {
+      await visit('/boomsubstate');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
+    assert.equal(checkFocus(), 'Boom Substate Error');
+  });
 
-test('Linking across levels to routes with local error states', function(assert) {
-  visit('/');
+  test('Linking across levels to routes with local error states', async function(assert) {
+    await visit('/');
 
-  visit('/feed');
-  andThen(() => { assert.equal(checkFocus(), 'Feed'); });
+    await visit('/feed');
+    assert.equal(checkFocus(), 'Feed');
 
-  visit('/parent/boom');
-  andThen(() => { assert.equal(checkFocus(), 'Parent'); });
+    try {
+      await visit('/parent/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
+    assert.equal(checkFocus(), 'Parent');
 
-  visit('/profile');
-  andThen(() => { assert.equal(checkFocus(), 'John Doe'); });
+    await visit('/profile');
+    assert.equal(checkFocus(), 'John Doe');
 
-  visit('/parent/boomsubstate');
-  andThen(() => { assert.equal(checkFocus(), 'Parent'); });
-});
+    try {
+      await visit('/parent/boomsubstate');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
+    assert.equal(checkFocus(), 'Parent');
+  });
 
-test('Linking to descendant routes with local error states.', function(assert) {
-  visit('/');
+  test('Linking to descendant routes with local error states.', async function(assert) {
+    await visit('/');
 
-  visit('/feed');
-  andThen(() => { assert.equal(checkFocus(), 'Feed'); });
+    await visit('/feed');
+    assert.equal(checkFocus(), 'Feed');
 
-  visit('/parent');
-  andThen(() => { assert.equal(checkFocus(), 'Parent'); });
+    await visit('/parent');
+    assert.equal(checkFocus(), 'Parent');
 
-  visit('/parent/boom');
-  andThen(() => { assert.equal(checkFocus(), 'Parent Error'); });
+    try {
+      await visit('/parent/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
+    assert.equal(checkFocus(), 'Parent Error');
 
-  visit('/profile');
-  andThen(() => { assert.equal(checkFocus(), 'John Doe'); });
+    await visit('/profile');
+    assert.equal(checkFocus(), 'John Doe');
 
-  visit('/parent');
-  andThen(() => { assert.equal(checkFocus(), 'Parent'); });
+    await visit('/parent');
+    assert.equal(checkFocus(), 'Parent');
 
-  visit('/parent/boomsubstate');
-  andThen(() => { assert.equal(checkFocus(), 'Boom Substate Error'); });
-});
+    try {
+      await visit('/parent/boomsubstate');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
+    assert.equal(checkFocus(), 'Boom Substate Error');
+  });
 
-test('Linking to descendant routes with local error states.', function(assert) {
-  visit('/');
+  test('Linking to descendant routes with local error states.', async function(assert) {
+    await visit('/');
 
-  visit('/feed');
-  andThen(() => { assert.equal(checkFocus(), 'Feed'); });
+    await visit('/feed');
+    assert.equal(checkFocus(), 'Feed');
 
-  visit('/iso-parent/boom');
-  andThen(() => { assert.equal(checkFocus(), 'Global Error'); });
+    try {
+      await visit('/iso-parent/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
+    assert.equal(checkFocus(), 'Global Error');
 
-  visit('/profile');
-  andThen(() => { assert.equal(checkFocus(), 'John Doe'); });
+    await visit('/profile');
+    assert.equal(checkFocus(), 'John Doe');
 
-  visit('/iso-parent');
-  andThen(() => { assert.equal(checkFocus(), 'Isolated Parent'); });
+    await visit('/iso-parent');
+    assert.equal(checkFocus(), 'Isolated Parent');
 
-  visit('/iso-parent/boom');
-  andThen(() => { assert.equal(checkFocus(), 'Global Error'); });
-});
+    try {
+      await visit('/iso-parent/boom');
+    }
+    catch (err) {
+      assert.equal(err.message, 'boom');
+    }
+    assert.equal(checkFocus(), 'Global Error');
+  });
 
-test('Linking to a slow loading route', function(assert) {
-  visit('/');
+  test('Linking to a slow loading route', async function(assert) {
+    await visit('/');
 
-  let focusingOutlet;
-  let focusCount = 0;
-  let blurCount = 0;
+    let focusingOutlet;
+    let focusCount = 0;
+    let blurCount = 0;
 
-  andThen(() => {
     focusingOutlet = document.querySelector('.focusing-outlet');
 
     focusingOutlet.focusStub = focusingOutlet.focus;
@@ -119,11 +160,9 @@ test('Linking to a slow loading route', function(assert) {
       blurCount++;
       focusingOutlet.blurStub();
     };
-  });
 
-  visit('/slow');
+    await visit('/slow');
 
-  andThen(() => {
     assert.equal(focusCount, 2);
     assert.equal(blurCount, 2);
     assert.equal(checkFocus(), 'Slow Route');
@@ -131,10 +170,10 @@ test('Linking to a slow loading route', function(assert) {
     focusingOutlet.focus = focusingOutlet.focusStub;
     focusingOutlet.blur = focusingOutlet.blurStub;
   });
-});
 
-test('Should load leaf routes with a spurious focusing focusingOutlet without any errors.', function(assert) {
-  visit('/');
-  visit('/about');
-  andThen(() => { assert.equal(checkFocus(), 'About Us'); });
+  test('Should load leaf routes with a spurious focusing focusingOutlet without any errors.', async function(assert) {
+    await visit('/');
+    await visit('/about');
+    assert.equal(checkFocus(), 'About Us');
+  });
 });
